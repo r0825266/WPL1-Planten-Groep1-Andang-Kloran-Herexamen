@@ -1,0 +1,228 @@
+﻿<UserControl x:Class="Plantjes.Views.UserControls.UserControlName"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="720"
+             d:DesignWidth="1200">
+    <!--UserControl herschreven door MarijnCo met Binding werk van voorgangers, StaticResources staan in App.xaml voor aanpassingen-->
+    <Grid Margin="10,10,10,0" Height="700" VerticalAlignment="Top">
+
+        <!--Zoek filters-->
+        <GroupBox
+                BorderThickness="0" Margin="0,76,943,0" >
+            <Border Style="{StaticResource BorderBox}" Margin="0">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Label}">
+                            <Setter Property="Margin" Value="0,7,0,0"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Label Content="BASIS FILTERS" Style="{StaticResource LabelBorderTitle}"/>
+                    <Label Content="Type"  Width="200" Height="28" BorderThickness="1" Background="#FFA2C8A2"  BorderBrush="#FF20331C">
+                        <Label.Effect>
+                            <DropShadowEffect />
+                        </Label.Effect>
+                    </Label>
+                    <ComboBox x:Name="cmbType"  Width="200" Height="28"
+                      ItemsSource="{Binding cmbTypes}"
+                      DisplayMemberPath="Planttypenaam"
+                      SelectedValuePath="Planttypeid"
+                      SelectedItem="{Binding Path=SelectedType, Mode=TwoWay}" IsEditable="True">
+
+                        <ComboBox.Effect>
+                            <DropShadowEffect />
+                        </ComboBox.Effect>
+                    </ComboBox>
+                    <Label Content="Familie" BorderThickness="1" BorderBrush="#FF20331C" Background="#FFA2C8A2" Height="28" Canvas.Left="7" Canvas.Top="78" Width="200">
+                        <Label.Effect>
+                            <DropShadowEffect />
+                        </Label.Effect>
+                    </Label>
+                    <ComboBox x:Name="cmbFamilie" Canvas.Left="7" Canvas.Top="111" Width="200" Height="28"
+                      ItemsSource="{Binding cmbFamilies}"
+                      SelectedItem="{Binding Path=SelectedFamilie}"
+                      DisplayMemberPath="Familienaam"
+                      SelectedValuePath="FamileId" IsEditable="True">
+                        <ComboBox.Effect>
+                            <DropShadowEffect />
+                        </ComboBox.Effect>
+                    </ComboBox>
+                    <Label Content="Geslacht" Canvas.Left="7" Canvas.Top="144" Width="200" BorderThickness="1" BorderBrush="#FF20331C" Background="#FFA2C8A2" Height="28">
+                        <Label.Effect>
+                            <DropShadowEffect />
+                        </Label.Effect>
+                    </Label>
+                    <ComboBox x:Name="cmbGeslacht" Canvas.Left="7" Canvas.Top="177" Width="200" Height="30"
+                      ItemsSource="{Binding cmbGeslacht}" 
+                      DisplayMemberPath="Geslachtnaam"
+                      SelectedValuePath="GeslachtId"
+                      SelectedItem="{Binding Path=SelectedGeslacht, Mode=TwoWay}" IsEditable="True">
+                        <ComboBox.Effect>
+                            <DropShadowEffect />
+                        </ComboBox.Effect>
+                    </ComboBox>
+                    <Label Content="Soort" Canvas.Left="7" Canvas.Top="212" Width="200" BorderThickness="1" BorderBrush="#FF20331C" Background="#FFA2C8A2"  Height="28">
+                        <Label.Effect>
+                            <DropShadowEffect />
+                        </Label.Effect>
+                    </Label>
+                    <ComboBox x:Name="cmbSoort" Width="200" Height="28"
+                      ItemsSource="{Binding cmbSoort}"
+                      DisplayMemberPath="Soortnaam"
+                      SelectedValuePath="Soortid"
+                      SelectedItem="{Binding Path=SelectedSoort, Mode=TwoWay}" IsEditable="True">
+                        <ComboBox.Effect>
+                            <DropShadowEffect />
+                        </ComboBox.Effect>
+                    </ComboBox>
+                    <Label Content="Naam" BorderThickness="1" BorderBrush="#FF20331C" Background="#FFA2C8A2"  Height="28" Width="200" RenderTransformOrigin="0.487,0.673">
+                        <Label.Effect>
+                            <DropShadowEffect />
+                        </Label.Effect>
+                    </Label>
+                    <TextBox x:Name="txtNaam" Text="{Binding Path=SelectedNederlandseNaam}"  TextWrapping="Wrap" Height="28" Width="200">
+                        <TextBox.Effect>
+                            <DropShadowEffect />
+                        </TextBox.Effect>
+                    </TextBox>
+                    <Label Content="Variant" BorderThickness="1" BorderBrush="#FF20331C" Background="#FFA2C8A2" Height="28" Width="200">
+                        <Label.Effect>
+                            <DropShadowEffect/>
+                        </Label.Effect>
+                    </Label>
+                    <ComboBox x:Name="cmbVariant" Width="198" Height="28"
+                      ItemsSource="{Binding cmbVariant}"
+                      DisplayMemberPath="Variantnaam"
+                      SelectedValuePath="VariantId"
+                      SelectedItem="{Binding Path= SelectedVariant}" IsEditable="True"
+                      >
+                        <ComboBox.Effect>
+                            <DropShadowEffect/>
+                        </ComboBox.Effect>
+                    </ComboBox>
+                    <Label Content="Ratio blad/bloei" BorderThickness="1"  BorderBrush="#FF20331C" Background="#FFA2C8A2" Height="28" Width="200">
+                        <Label.Effect>
+                            <DropShadowEffect/>
+                        </Label.Effect>
+                    </Label>
+                    <ComboBox  Canvas.Left="7" Canvas.Top="443" Width="200" Height="28" 
+                      ItemsSource="{Binding cmbRatioBladBloei}"
+                      DisplayMemberPath="RatioBloeiBlad" IsEditable="True" 
+                      >
+                        <ComboBox.Effect>
+                            <DropShadowEffect/>
+                        </ComboBox.Effect>
+                    </ComboBox>
+
+
+                    <Button x:Name="btnZoeken" Content="Zoeken" FontSize="27" Style="{StaticResource ButtonUnified}" 
+                    Command="{Binding SearchCommand}" Height="35" Width="200" Margin="0,7,0,0">
+                    </Button>
+                    <Button x:Name="btnNameReset" Margin="0,7,0,0"
+                    Content="Reset" FontSize="27" Style="{StaticResource ButtonUnified}"
+                    Command="{Binding ResetCommand}" Height="35" Width="200">
+                    </Button>
+                    <Button x:Name="btnFilteren" Style="{StaticResource ButtonUnified}"
+                    Content="Meer filters" Margin="0,7,0,0"
+                    FontSize="27" Canvas.Left="7" Canvas.Top="484" Height="35" Width="200"
+                            Command="{Binding MoreFiltersCommand}">
+                    </Button>
+                </StackPanel>
+            </Border>
+        </GroupBox>
+
+        <Border Style="{StaticResource BorderBox}" Margin="242,124,507,6">
+            <ListBox x:Name="lstResultSearch"
+                 ItemsSource="{Binding filteredPlantResults}"
+                 SelectedItem="{Binding Path= SelectedPlantInResult, Mode=TwoWay}"
+                 Visibility="Visible" Background="#99FFFFFF" FontWeight="Bold" FontSize="14" Width="435" HorizontalAlignment="Center" Height="564" VerticalAlignment="Center">
+                <ListBox.ItemTemplate>
+                    <!--Robin: Met deze template wordt het mogelijk om veschillende properties van een plant te binden aan de listbox-->
+                    <DataTemplate>
+                        <StackPanel Margin="10">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Nederlandse naam: " TextDecorations="Underline" />
+                                <TextBlock Text="{Binding NederlandsNaam}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Naam: " TextDecorations="Underline" />
+                                <TextBlock Text="{Binding Fgsv}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Type: " TextDecorations="Underline" />
+                                <TextBlock Text="{Binding Type}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Familie: " TextDecorations="Underline" />
+                                <TextBlock Text="{Binding Familie}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Geslacht: " TextDecorations="Underline" />
+                                <TextBlock Text="{Binding Geslacht}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Soort: " TextDecorations="Underline" />
+                                <TextBlock Text="{Binding Soort}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                <TextBlock Text="Variant: " TextDecorations="Underline" />
+                                <TextBlock Text="{Binding Variant}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <Label Content="Resultaat planten" FontSize="17" Height="44" Margin="242,0,742,581" VerticalAlignment="Bottom" Style="{StaticResource LabelBorderTitle}">
+            <Label.Effect>
+                <DropShadowEffect />
+            </Label.Effect>
+        </Label>
+        <Label Content="Details planten" FontSize="23" Height="44" Margin="942,76,10,0" VerticalAlignment="Top" Grid.RowSpan="2" Style="{StaticResource LabelBorderTitle}">
+            <Label.Effect>
+                <DropShadowEffect />
+            </Label.Effect>
+        </Label>
+        <StackPanel Orientation="Horizontal" Margin="534,18,336,581">
+            <Image Source="{Binding ImageHabitus}" Height="100" Width="100" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
+            <Image Source="{Binding ImageBlad}" Height="100" Width="100" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
+            <Image Source="{Binding ImageBloei}" Height="100" Width="100" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
+        </StackPanel>
+
+
+        <Border Style="{StaticResource BorderBox}" Margin="704,124,10,6">
+            <Canvas x:Name="CvsZoeken_Copy" Visibility="Visible" Background="#FFA0A0A0" HorizontalAlignment="Center" Width="470" VerticalAlignment="Center" Height="564" >
+                <Grid Height="450" Width="450" Canvas.Left="10" Canvas.Top="104">
+                    <ContentControl Content="{Binding currentViewModel}"/>
+                </Grid>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btnBloei" Content="Bloei" Style="{StaticResource ButtonUnified}"
+                Command="{Binding mainNavigationCommand}"
+                CommandParameter="VIEWBLOOM" Height="30" Width="100" Margin="5"/>
+                        <Button x:Name="btnGroei" Content="Groei" Style="{StaticResource ButtonUnified}"
+                Command="{Binding mainNavigationCommand}"
+                CommandParameter="VIEWGROW" Height="30" Width="100" Margin="5" Canvas.Left="105"/>
+                        <Button x:Name="btnHabitat" Content="Habitat" Style="{StaticResource ButtonUnified}"
+                Command="{Binding mainNavigationCommand}"
+                CommandParameter="VIEWHABITAT" Height="30" Width="100" Margin="5" Canvas.Left="210"/>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <Button x:Name="btnUiterlijk" Content="Uiterlijk" HorizontalAlignment="Left" Style="{StaticResource ButtonUnified}"
+                Command="{Binding mainNavigationCommand}"
+                CommandParameter="VIEWAPPEARANCE" Height="30" Width="100" Margin="5"/>
+                        <Button x:Name="btnVerzorging" Content="Verzorging" HorizontalAlignment="Left" Style="{StaticResource ButtonUnified}"
+                Command="{Binding mainNavigationCommand}"
+                CommandParameter="VIEWGROOMING" Height="30" Width="140" Margin="5"/>
+
+                    </StackPanel>
+                </StackPanel>
+            </Canvas>
+        </Border>
+
+
+    </Grid>
+</UserControl>

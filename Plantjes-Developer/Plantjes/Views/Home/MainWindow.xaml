@@ -1,0 +1,103 @@
+﻿<Window x:Name="Main"
+        x:Class="Plantjes.Views.Home.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pages="clr-namespace:Plantjes.Views.UserControls"
+        xmlns:mgmtpages="clr-namespace:Plantjes.Views.UserControls.Beheer"
+        xmlns:viewModels="clr-namespace:Plantjes.ViewModels"
+        xmlns:plantjes="clr-namespace:Plantjes"
+
+        mc:Ignorable="d"
+        Title="Planten" Height="900" Width="1250" Background="#FFA0A0A0">
+
+    <Window.Resources>
+
+        <!--deze zijn nodig voor de navigatie van de app-->
+        <DataTemplate DataType="{x:Type viewModels:ViewModelNameResult}">
+            <pages:UserControlName />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ViewModelHabitat}">
+            <pages:UserControlHabitat />
+        </DataTemplate>
+
+
+        <DataTemplate DataType="{x:Type viewModels:ViewModelGrow}">
+            <pages:UserControlGrow />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ViewModelGrooming}">
+            <pages:UserControlGrooming />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ViewModelUserManagement}">
+            <mgmtpages:UserControlUserManagement />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:ViewModelPlantManagement}">
+            <mgmtpages:UserControlPlantManagement />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ViewModelBloom}">
+            <pages:UserControlBloom />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ViewModelAppearance}">
+            <pages:UserControlAppearance />
+        </DataTemplate>
+    </Window.Resources>
+
+    <Viewbox MaxHeight="900" MaxWidth="1250">
+        <Grid Opacity="0.9">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="46*" />
+                <ColumnDefinition Width="579*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="884.04" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Margin="27,10,442,803" Orientation="Horizontal" Grid.Column="1">
+                <Button x:Name="btnNaam" Content="Plant opzoeken" Margin="0,0,5,0"
+                        Command="{Binding mainNavigationCommand}"
+                        CommandParameter="VIEWNAME" Click="btn_ClickHideImage" Height="60" Width="200" Style="{StaticResource ButtonUnified}" />
+                <Button x:Name="btnPlantToevoegen" Content="Plant toevoegen" Margin="0,0,5,0" Visibility="{Binding ShowEditPlants}"
+                        Command="{Binding AddPlantCommand}"
+
+                        CommandParameter="VIEWNAME" Click="btn_ClickHideImage" Height="60" Style="{StaticResource ButtonUnified}" />
+                <ComboBox x:Name="cmbBeheer" Width="200" Height="60" Margin="4,2,0,0" Style="{StaticResource ComboBoxUnified}" Visibility="{Binding ShowUserManagement}">
+
+                    <ComboBoxItem Focusable="False">
+                        <Button Content="Gebruiker" Name="btnUserManagement" Style="{StaticResource ButtonUnified}"
+                                Command="{Binding mainNavigationCommand}"
+                                CommandParameter="VIEWUSERMANAGEMENT" Click="btn_ClickHideImage" />
+                    </ComboBoxItem>
+                    <ComboBoxItem Focusable="False">
+                        <Button Content="Plant" Name="btnBeheerPlant" Style="{StaticResource ButtonUnified}"
+                                Command="{Binding mainNavigationCommand}"
+                                CommandParameter="VIEWPLANTMANAGEMENT"
+                                Click="btn_ClickHideImage" />
+                    </ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+
+
+            <ListBox x:Name="lstDetails" Visibility="Hidden" Margin="468,176,47,700" Background="#99FFFFFF" Grid.Column="1" />
+
+
+            <!--<Frame x:Name="MainFrame" Margin="0,190,0,0"  Content=""/>-->
+
+            <!-- hier doe je de binding van het currentViewModel !Clue van het systeem -->
+            <Grid x:Name="MainContent" HorizontalAlignment="Left" Width="1230" Margin="10,101,0,0" Height="773" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                <ContentControl Content="{Binding currentViewModel}" HorizontalAlignment="Left" Width="1210" Height="754" VerticalAlignment="Center" Margin="10,0,0,0" />
+            </Grid>
+            <Label x:Name="lblLogin" Content="{Binding loggedInMessage}" Grid.Column="1" Margin="0,14,95,0" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="40" Width="Auto" Foreground="Black" FontStretch="UltraExpanded" FontSize="19" />
+            <Label Content="{Binding rol}" Grid.Column="1" Margin="0,36,95,0" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="40" Width="Auto" Foreground="Black" FontStretch="UltraExpanded" FontSize="19" />
+            <Image x:Name="imgUser" Grid.Column="1" Margin="1087,23,-4,815" Source="../../Image/user.png" />
+            <Image Margin="13,17,1155,803" Grid.ColumnSpan="2" Source="../../Image/vives.png" />
+            <Image x:Name="img_vives_logo_main" Grid.Column="1" Margin="140,298,140,207" Source="/Views/Home/Vives_Logo_MainWindow.png" />
+        </Grid>
+    </Viewbox>
+</Window>

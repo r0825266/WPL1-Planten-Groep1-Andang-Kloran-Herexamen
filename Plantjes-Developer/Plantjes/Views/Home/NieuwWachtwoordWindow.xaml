@@ -1,0 +1,38 @@
+﻿<Window x:Class="Plantjes.Views.Home.NieuwWachtwoordWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Plantjes.Views.Home"
+        xmlns:vm="clr-namespace:Plantjes.ViewModels"
+        mc:Ignorable="d"
+        Title="NieuwWachtwoordWindow" Height="300" Width="464" Background="#FFA0A0A0">
+    <!-- Written by Kjell-->
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:ViewModelNieuwWachtwoord}">
+
+        </DataTemplate>
+    </Window.Resources>
+
+    <Viewbox>
+        <Grid>
+            <Label x:Name="lblWachtwoord" Content="Wachtwoord:" Margin="51,108,268,149" Foreground="White" RenderTransformOrigin="0.504,-0.246"/>
+            <Label Content="Nieuw wachtwoord instellen" Margin="102,50,102,196" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="17" Foreground="White"/>
+            <Label x:Name="lblHerhaalWachtwoord" Content="Herhaal wachtwoord:" Margin="51,158,268,99" Foreground="White"/>
+            <PasswordBox Margin="202,158,0,98" HorizontalAlignment="Left" VerticalContentAlignment="Center" Width="156"
+                         x:Name="txtRepeatPassword"
+                         PasswordChanged="txtWachtwoordHerhaal_OnPasswordChanged"></PasswordBox>
+            <PasswordBox Margin="202,108,0,148" HorizontalAlignment="Left" VerticalContentAlignment="Center" Width="156"
+                         x:Name="txtPassword" PasswordChanged="txtWachtwoord_PasswordChanged" 
+                         >
+            </PasswordBox>
+            <Button x:Name="btnBevestig" Content="Bevestigen" Margin="121,220,121,38" 
+                    Style="{StaticResource ButtonUnified}" Command="{Binding changePasswordCommand}" Height="25" FontSize="15"/>
+            <Label x:Name="lblError" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="WhiteSmoke" Height="35" Width="340" FontWeight="Bold" HorizontalContentAlignment="Center" >
+                <Label.Content>
+                    <AccessText TextWrapping="Wrap" Text="{Binding errorMessage}"/>
+                </Label.Content>
+            </Label>
+        </Grid>
+    </Viewbox>
+</Window>

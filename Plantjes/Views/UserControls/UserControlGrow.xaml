@@ -1,0 +1,390 @@
+﻿ <UserControl x:Class="Plantjes.Views.UserControls.UserControlGrow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="450">
+    <!--UserControl herschreven door MarijnCo met Binding werk van voorgangers, StaticResources staan in App.xaml voor aanpassingen-->
+    <Grid>
+        <GroupBox
+                BorderThickness="0" Width="450" Height="450" >
+            <Border Style="{StaticResource BorderBox}">
+                <StackPanel >
+                    <Label Content="GROEI" Style="{StaticResource LabelBorderTitle}"/>
+                    <Grid Height="409">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"/>
+                            <ColumnDefinition Width="45*"/>
+                            <ColumnDefinition Width="59*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="105*"/>
+                            <RowDefinition Height="79*"/>
+                        </Grid.RowDefinitions>
+                        <!--Habitat-->
+
+                        <StackPanel Grid.ColumnSpan="2">
+                            <Label Content="Habitat" Style="{StaticResource LabelBorder}"/>
+                            <ListBox Height="209">
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Onbekend" VerticalAlignment="Center" x:Name="CbxHabitatOnbekend"
+                                                  IsChecked="{Binding Path= SelectedCheckBoxHabitatOnbekend , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Content="Gemengde boord met:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem GB1" Margin="30,0,0,0" x:Name="CbxHabitatGB1" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatGB1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem GB2" Margin="30,0,0,0" x:Name="CbxHabitatGB2"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatGB2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="vochtige bodem GB3" Margin="30,0,0,0" x:Name="CbxHabitatGB3"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatGB3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+
+                                <ListBoxItem Content="Open plaats met:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem OP1" Margin="30,0,0,0" x:Name="CbxHabitatOP1" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatOP1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem OP1B" Margin="30,0,0,0" x:Name="CbxHabitatOP1B" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatOP1B, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem OP2" Margin="30,0,0,0" x:Name="CbxHabitatOP2" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatOP2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem OP2B" Margin="30,0,0,0" x:Name="CbxHabitatOPB2"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatOP2B, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="vochtige bodem OP3" Margin="30,0,0,0" x:Name="CbxHabitatOP3"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatOP3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="vochtige bodem OP3B" Margin="30,0,0,0" x:Name="CbxHabitatOP3B" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatOP3B, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Content="Steppe met:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem SH1" Margin="30,0,0,0" x:Name="CbxHabitatSH1" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatSH1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem SH2" Margin="30,0,0,0" x:Name="CbxHabitatSH2" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatSH2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Content="Bos en onder bomen met:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem B1" Margin="30,0,0,0" x:Name="CbxHabitatB1" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatB1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem B2" Margin="30,0,0,0" x:Name="CbxHabitatB2" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatB2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="vochtige bodem B3" Margin="30,0,0,0" x:Name="CbxHabitatB3" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatB3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+
+                                <ListBoxItem Content="Bodem met grind met:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem GR1" Margin="30,0,0,0" x:Name="CbxHabitatGR1"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatGR1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem GR2" Margin="30,0,0,0" x:Name="CbxHabitatGR2" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatGR2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+
+                                <ListBoxItem Content="Heide met:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem H1" Margin="30,0,0,0" x:Name="CbxHabitatH1"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatH1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem H2" Margin="30,0,0,0" x:Name="CbxHabitatH2" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatH2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+
+                                <ListBoxItem Content="Stenige:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem ST1" Margin="30,0,0,0" x:Name="CbxHabitatST1" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatST1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem ST2" Margin="30,0,0,0" x:Name="CbxHabitatST2" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatST2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+
+                                <ListBoxItem Content="Bosrand met:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem BR1" Margin="30,0,0,0" x:Name="CbxHabitatBR1" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatBR1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem BR2" Margin="30,0,0,0" x:Name="CbxHabitatBR2"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatBR2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="vochtige bodem BR3" Margin="30,0,0,0" x:Name="CbxHabitatBR3" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatBR3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+
+                                <ListBoxItem Content="Ondiepe:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="en droge bodem OB1" Margin="30,0,0,0" x:Name="CbxHabitatOB1"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatOB1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem OB2" Margin="30,0,0,0" x:Name="CbxHabitatOB2" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatOB2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+
+                                <ListBoxItem Content="Rotstuin met:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem A1" Margin="30,0,0,0" x:Name="CbxHabitatA1"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatA1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem A2" Margin="30,0,0,0" x:Name="CbxHabitatA2"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatA2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Content="Muurbeplanting met:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem" Margin="30,0,0,0" x:Name="CbxHabitatM1"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatM1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem" Margin="30,0,0,0" x:Name="CbxHabitatM2"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatM2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Content="Oever:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="moeraszone" Margin="30,0,0,0" x:Name="CbxHabitatO4"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatO4, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="ondiep water" Margin="30,0,0,0" x:Name="CbxHabitatO5"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatO5, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Content="Steenvoegen met:" Focusable="False"/>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="droge bodem SV1" Margin="30,0,0,0" x:Name="CbxHabitatSV1"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatSV1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="frisse bodem SV2" Margin="30,0,0,0" x:Name="CbxHabitatSV2"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatSV2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="vochtige bodem SV3" Margin="30,0,0,0" x:Name="CbxHabitatSV3"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxHabitatSV3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                            </ListBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <!--Antagonische omgeving Warre-->
+                            <StackPanel>
+                                <Label Content="Antagonische omgeving" Style="{StaticResource LabelBorder}"/>
+                                <ListBox Height="93" >
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Onbekend" VerticalAlignment="Center" x:Name="AntagoOnbekend"
+                                                  IsChecked="{Binding Path= SelectedCheckBoxAntagonischOnbekend , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Geen invloed" VerticalAlignment="Center" x:Name="AntagoGeenInv"
+                                                  IsChecked="{Binding Path= SelectedCheckBoxAntagonischGeenInvloed , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Terugdringen ontwikkeling tot verlies" VerticalAlignment="Center" x:Name="AntagoTerug"
+                                                  IsChecked="{Binding Path= SelectedCheckBoxAntagonischTerugDringen , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Gereduceerde groei - bladmassa" VerticalAlignment="Center" x:Name="AntagoReduce"
+                                                  IsChecked="{Binding Path= SelectedCheckBoxAntagonischGereduceerd , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Toename groei - bladmassa" VerticalAlignment="Center" x:Name="AntagoGroei"
+                                                  IsChecked="{Binding Path= SelectedCheckBoxAntagonischGroei , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+
+                                </ListBox>
+                            </StackPanel>
+                            <!--Bezonning Warre-->
+                            <StackPanel>
+                                <Label Content="Bezonning" Style="{StaticResource LabelBorder}"/>
+                                <ListBox Height="92" >
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Onbekend" VerticalContentAlignment="Center" x:Name="AbioBezonOnbekend" 
+                                              IsChecked="{Binding Path=SelectedCheckBoxBezonningOnbekend, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Zon" VerticalContentAlignment="Center" x:Name="AbioBezonZon" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxBezonningZ, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Schaduw" VerticalContentAlignment="Center" x:Name="AbioBezonScha" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxBezonningS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Half schaduw" VerticalContentAlignment="Center" x:Name="AbioBezonHScha" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxBezonningHS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Zon - schaduw" VerticalContentAlignment="Center" x:Name="AbioBezonZonScha" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxBezonningZS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Zon - half schaduw" VerticalContentAlignment="Center" x:Name="AbioBezonZonHScha" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxBezonningZHS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Zon - half schaduw - schaduw" VerticalContentAlignment="Center" x:Name="AbioBezonZonHSchScha"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxBezonningZHSS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Half schaduw - schaduw" VerticalContentAlignment="Center" x:Name="AbioBezonHSchaScha"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxBezonningHSS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Margin="0,233,0,0" Grid.RowSpan="2">
+                            <!--Grondsoort Warre -->
+                            <StackPanel>
+                                <Label Content="Grondsoort" Style="{StaticResource LabelBorder}"/>
+                                <ListBox Height="151">
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content ="Onbekend" VerticalAlignment="Center" x:Name="GrondSoortOnbekend" 
+                                                  IsChecked="{Binding Path= SelectedCheckBoxGrondSoortOnbekend , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content ="Z" VerticalAlignment="Center" x:Name="GrondSoortZ" 
+                                                  IsChecked="{Binding Path= SelectedCheckBoxGrondSoortZ , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content ="ZL" VerticalAlignment="Center" x:Name="GrondSoortZL" 
+                                                  IsChecked="{Binding Path= SelectedCheckBoxGrondSoortZL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content ="L" VerticalAlignment="Center" x:Name="GrondSoortL" 
+                                                  IsChecked="{Binding Path= SelectedCheckBoxGrondSoortL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content ="LK" VerticalAlignment="Center" x:Name="GrondSoortLK" 
+                                                  IsChecked="{Binding Path= SelectedCheckBoxGrondSoortLK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content ="K" VerticalAlignment="Center" x:Name="GrondSoortK" 
+                                                  IsChecked="{Binding Path= SelectedCheckBoxGrondSoortK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content ="ZLK" VerticalAlignment="Center" x:Name="GrondSoortZLK" 
+                                                  IsChecked="{Binding Path= SelectedCheckBoxGrondSoortZLK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!--Vochtbehoefte-->
+                        <StackPanel Grid.Column="1" Margin="0,233,0,0" Grid.RowSpan="2">
+                            <Label Content="Vochtbehoefte" Style="{StaticResource LabelBorder}"/>
+                            <ListBox Height="151">
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Onbekend" VerticalContentAlignment="Center" x:Name="CbxVochtbehoefteOnbekend" 
+                                              IsChecked="{Binding Path=SelectedCheckBoxVochtbehoefteOnbekend, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Droog" VerticalContentAlignment="Center" x:Name="CbxVochtbehoefteDroog" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVochtbehoefteDroog, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Droog-Fris" VerticalContentAlignment="Center" x:Name="CbxVochtbehoefteDroogFris" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVochtbehoefteDroogFris, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Fris" VerticalContentAlignment="Center" x:Name="CbxVochtbehoefteFris" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVochtbehoefteFris, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Fris-Vochtig" VerticalContentAlignment="Center" x:Name="CbxVochtbehoefteFrisVochtig" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVochtbehoefteFrisVochtig, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Vochtig" VerticalContentAlignment="Center" x:Name="CbxVochtbehoefteVochtig" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVochtbehoefteVochtig, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Vochtig-Nat" VerticalContentAlignment="Center" x:Name="CbxVochtbehoefteVochtigNat" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVochtbehoefteVochtigNat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Nat" VerticalContentAlignment="Center" x:Name="CbxVochtbehoefteNat" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVochtbehoefteNat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                            </ListBox>
+                        </StackPanel>
+                        <!--Voedingsbehoefte-->
+
+
+
+
+                        <StackPanel Grid.Column="2" Margin="0,233,0,0" Grid.RowSpan="2">
+                            <Label Content="Voedingsbehoefte" Style="{StaticResource LabelBorder}"/>
+                            <ListBox Height="151">
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Onbekend" x:Name="CbxVoedingsbehoefteOnbekend" 
+                                              IsChecked="{Binding Path=SelectedCheckBoxVoedingsbehoefteOnbekend, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Arm" x:Name="CbxVoedingsbehoefteArm" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVoedingsbehoefteArm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Arm-Matig" x:Name="CbxVoedingsbehoefteArmMatig" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVoedingsbehoefteArmMatig, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Matig" x:Name="CbxVoedingsbehoefteMatig" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVoedingsbehoefteMatig, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Matig-Voedselrijk" x:Name="CbxVoedingsbehoefteMatigVoedselrijk"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVoedingsbehoefteMatigVoedselrijk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Voedselrijk" x:Name="CbxVoedingsbehoefteVoedselrijk" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVoedingsbehoefteVoedselrijk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Voedselrijk-Indifferent" x:Name="CbxVoedingsbehoefteVoedselrijkIndifferent" 
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVoedingsbehoefteVoedselrijkIndifferent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Indifferent" x:Name="CbxVoedingsbehoefteIndifferent"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxVoedingsbehoefteIndifferent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                            </ListBox>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </GroupBox>
+    </Grid>
+</UserControl>

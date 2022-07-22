@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="Plantjes.Views.UserControls.UserControlGrooming"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Height="450" Width="450">
+    <!--UserControl herschreven door MarijnCo met Binding werk van voorgangers, StaticResources staan in App.xaml voor aanpassingen-->
+    <Grid>
+        <GroupBox
+            BorderThickness="0" Width="450" Height="450">
+            <Border Style="{StaticResource BorderBox}">
+                <StackPanel >
+                    <Label Content="Beheersdaad" Style="{StaticResource LabelBorderTitle}"/>
+                    <Grid Height="369">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <Label Content="Actie" Style="{StaticResource LabelBorder}"/>
+                            <ComboBox x:Name="CmbBeheerdaad" ItemsSource="{Binding cmbBeheerdaad}" />
+                            <StackPanel>
+                                <Label Content="Opmerking:"/>
+                                <TextBox Height="200" TextWrapping="WrapWithOverflow"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="Frequentie per jaar:"/>
+                                <TextBox/>
+                            </StackPanel>
+
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <Label Content="Uit te voeren in:" Style="{StaticResource LabelBorder}"/>
+                            <ListBox Height="345">
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Januari" VerticalContentAlignment="Center" x:Name="CbxJan" 
+                                              IsChecked="{Binding Path=SelectedCheckBoxJan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Februari" VerticalContentAlignment="Center" x:Name="CbxFeb"
+                                              IsChecked="{Binding Path=SelectedCheckBoxFeb, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Maart" VerticalContentAlignment="Center" x:Name="CbxMaa" 
+                                              IsChecked="{Binding Path=SelectedCheckBoxMar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="April" VerticalContentAlignment="Center" x:Name="CbxApr" 
+                                              IsChecked="{Binding Path=SelectedCheckBoxApr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Mei" VerticalContentAlignment="Center" x:Name="CbxMei" 
+                                              IsChecked="{Binding Path=SelectedCheckBoxMay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Juni" VerticalContentAlignment="Center" x:Name="CbxJun"
+                                              IsChecked="{Binding Path=SelectedCheckBoxJun, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Juli" VerticalContentAlignment="Center" x:Name="CbxJul"
+                                              IsChecked="{Binding Path=SelectedCheckBoxJul, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Augustus" VerticalContentAlignment="Center" x:Name="CbxAug"
+                                              IsChecked="{Binding Path=SelectedCheckBoxAug, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="September" VerticalContentAlignment="Center" x:Name="CbxSep" 
+                                              IsChecked="{Binding Path=SelectedCheckBoxSep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Oktober" VerticalContentAlignment="Center" x:Name="CbxOkt"
+                                              IsChecked="{Binding Path=SelectedCheckBoxOct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="November" VerticalContentAlignment="Center" x:Name="CbxNov"
+                                              IsChecked="{Binding Path=SelectedCheckBoxNov, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="December" VerticalContentAlignment="Center" x:Name="CbxDec" 
+                                              IsChecked="{Binding Path=SelectedCheckBoxDec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </ListBoxItem>
+                            </ListBox>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </GroupBox>
+    </Grid>
+</UserControl>

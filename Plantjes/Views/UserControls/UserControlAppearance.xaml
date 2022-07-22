@@ -1,0 +1,643 @@
+﻿<UserControl x:Class="Plantjes.Views.UserControls.UserControlAppearance"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="450">
+    <!--UserControl herschreven door MarijnCo met Binding werk van voorgangers, StaticResources staan in App.xaml voor aanpassingen-->
+    <Grid>
+        <GroupBox
+            BorderThickness="0" Width="450" Height="450" >
+            <Border Style="{StaticResource BorderBox}">
+                <StackPanel >
+                    <Label Content="UITERLIJK" Style="{StaticResource LabelBorderTitle}"/>
+                    <Grid Height="409">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="127*"/>
+                            <ColumnDefinition Width="89*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <StackPanel Height="203">
+                                <!--Stengelvorm & Bladvorm-->
+                                <Label Content="Stengelvorm en bladvorm" Style="{StaticResource LabelBorder}"/>
+                                <ListBox Height="179">
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}" >
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxStengelvormenOnbekend" 
+                                                                  IsChecked="{Binding Path=SelectedCheckBoxBladkleurOnbekend, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/Unknown.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Onbekend" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}" >
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxStengelvormenVorm1" 
+                                                              IsChecked="{Binding Path=SelectedCheckBoxStengelvormenVorm1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/tufted.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Tufted" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxStengelvormenVorm2" 
+                                                              IsChecked="{Binding Path=SelectedCheckBoxStengelvormenVorm2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/upright-arching.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Upright-arching" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxStengelvormenVorm3" 
+                                                              IsChecked="{Binding Path=SelectedCheckBoxStengelvormenVorm3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/arching.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Arching" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxStengelvormenVorm4" 
+                                                              IsChecked="{Binding Path=SelectedCheckBoxStengelvormenVorm4, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/upright-divergent.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Upright-divergent" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxStengelvormenVorm5" 
+                                                              IsChecked="{Binding Path=SelectedCheckBoxStengelvormenVorm5, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/upright-erect.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Upright-erect" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxStengelvormenVorm6" 
+                                                              IsChecked="{Binding Path=SelectedCheckBoxStengelvormenVorm6, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/mounded.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Mounded" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxBladvormenVorm1"
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladvormenVorm1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/kruipend, horizontaal groeiend of  mattenvormend.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Kruipend, horizontaal groeiend of mattenvormend" Style="{StaticResource BigCheckText}" Height="30"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxBladvormenVorm2" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladvormenVorm2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/rond of waaiervormig.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Rond of waaiervormig" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxBladvormenVorm3" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladvormenVorm3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/kussenvormend.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Kussenvormend" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxBladvormenVorm4" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladvormenVorm4, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/zuilvormig.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Zuilvormig" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxBladvormenVorm5" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladvormenVorm5, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/uitbuigend.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Uitbuigend" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxBladvormenVorm6" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladvormenVorm6, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/wortel rozet-planten.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="wortel rozet-planten" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxBladvormenVorm7" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladvormenVorm7, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/succulenten.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Succulenten" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxBladvormenVorm8" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladvormenVorm8, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/pollenvormers.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Pollenvormers" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxBladvormenVorm9" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladvormenVorm9, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="/Image/parasolvormig.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Parasolvormig" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <!--Kleur-->
+                        <StackPanel Grid.RowSpan="2" Grid.Column="1">
+                            <Label Content="Kleur" Style="{StaticResource LabelBorder}"/>
+                            <ListBox Height="106">
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="Transparent" x:Name="CbxBloeikleurOnbekend" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurOnbekend, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Onbekend" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="Black" x:Name="CbxBloeikleurZwart" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurZwart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Zwart" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="White" x:Name="CbxBloeikleurWit"
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurWit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Wit" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="Pink" x:Name="CbxBloeikleurRosé"
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurRosé, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Roze" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="Red" x:Name="CbxBloeikleurRood"
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurRood, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Rood" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="Orange" x:Name="CbxBloeikleurOranje" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurOranje, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Oranje" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="Plum" x:Name="CbxBloeikleurLila"
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurLila, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Lila" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="LightGray" x:Name="CbxBloeikleurGrijs" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurGrijs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Grijs" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="Green" x:Name="CbxBloeikleurGroen"
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurGroen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Groen" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="Yellow" x:Name="CbxBloeikleurGeel" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurGeel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Geel" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="Blue" x:Name="CbxBloeikleurBlauw"
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurBlauw, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Blauw" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="Violet" x:Name="CbxBloeikleurViolet" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurPaars, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Violet" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="Purple" x:Name="CbxBloeikleurPaars" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurPaars, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Paars" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False" >
+                                    <StackPanel Style="{StaticResource StackPanelColour}">
+                                        <Viewbox>
+                                            <CheckBox Background="SaddleBrown" x:Name="CbxBloeikleurBruin" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxBladkleurBruin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Viewbox>
+                                        <TextBlock Text="Bruin" Style="{StaticResource BigCheckTextColour}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+                            </ListBox>
+
+                            <Label Content="Bladhoogte" Style="{StaticResource LabelBorder}"/>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Min:" Width="40"/>
+                                    <ComboBox Width="80">
+                                        <ComboBoxItem Content="Onbekend"/>
+                                        <ComboBoxItem Content="1"/>
+                                        <ComboBoxItem Content="2"/>
+                                        <ComboBoxItem Content="3"/>
+                                        <ComboBoxItem Content="4"/>
+                                        <ComboBoxItem Content="5"/>
+                                    </ComboBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Max:" Width="40"/>
+                                    <ComboBox Width="80">
+                                        <ComboBoxItem Content="Onbekend"/>
+                                        <ComboBoxItem Content="1"/>
+                                        <ComboBoxItem Content="2"/>
+                                        <ComboBoxItem Content="3"/>
+                                        <ComboBoxItem Content="4"/>
+                                        <ComboBoxItem Content="5"/>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <!--Bladgrootte Warre-->
+                                <ListBox Height="88" >
+                                    <ListBoxItem>
+                                        <Label Content="Bladgrootte" Style="{StaticResource LabelBorder}" Width="155" Margin="-8,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Onbekend" VerticalContentAlignment="Center"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxGrootteOnbekend , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="5" VerticalContentAlignment="Center"
+                                                 IsChecked="{Binding Path=SelectedCheckBoxGrootte5 , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="10" VerticalContentAlignment="Center"
+                                                  IsChecked="{Binding Path= SelectedCheckBoxGrootte10, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="20" VerticalContentAlignment="Center"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxGrootte20 , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="50" VerticalContentAlignment="Center"
+                                                  IsChecked="{Binding Path= SelectedCheckBoxGrootte50, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="100" VerticalAlignment="Center"
+                                                  IsChecked="{Binding Path= SelectedCheckBoxGrootte100, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="150" VerticalAlignment="Center"
+                                                  IsChecked="{Binding Path= SelectedCheckBoxGrootte150, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                </ListBox>
+
+                                <!--Spruitfenelogie Warre-->
+                                <ListBox Height="114" >
+                                    <ListBoxItem>
+                                        <Label Content="Spruitfenologie" Style="{StaticResource LabelBorder}" Width="155" Margin="-8,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Onbekend" VerticalContentAlignment="Center"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxGrootteOnbekend , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Zomergroen" VerticalContentAlignment="Center"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxSpruitZomergroen , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Wintergroen" VerticalContentAlignment="Center"
+                                                  IsChecked="{Binding Path= SelectCheckBoxSpruitWintergroen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Altijd groen" VerticalContentAlignment="Center"
+                                                  IsChecked="{Binding Path=SelectedCheckBoxSpruitAltijdGroen , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="Voorjaarsgroen" VerticalContentAlignment="Center"
+                                                  IsChecked="{Binding Path= SelectedCheckBoxSpruitVoorjaarsgroen , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <!--Bladhoogte-->
+                        <StackPanel>
+
+
+                        </StackPanel>
+
+                        <StackPanel Margin="0,204,0,0" Grid.RowSpan="2">
+                            <!--Levensvorm-->
+                            <Label Content="Levensvorm" Style="{StaticResource LabelBorder}"/>
+                            <ListBox Height="183">
+                                <ListBoxItem Focusable="False">
+                                    <StackPanel Style="{StaticResource StackPanelListCheckBox}" >
+                                        <Viewbox>
+                                            <CheckBox x:Name="CbxLevenvormenOnbekend" 
+                                                          IsChecked="{Binding Path=SelectedCheckBoxBladkleurOnbekend, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <CheckBox.Background>
+                                                    <ImageBrush  Stretch="Uniform" ImageSource="/Image/Unknown.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                </CheckBox.Background>
+                                            </CheckBox>
+                                        </Viewbox>
+                                        <TextBlock Text="Onbekend" Style="{StaticResource BigCheckText}"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                        <Viewbox>
+                                            <CheckBox x:Name="CbxLevensvormenVorm1"
+                                                      IsChecked="{Binding Path=SelectedCheckBoxLevensvormenVorm1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <CheckBox.Background>
+                                                    <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="/image/Unknown.png"/>
+                                                </CheckBox.Background>
+                                            </CheckBox>
+                                        </Viewbox>
+                                        <TextBlock Text="Hydrofyten - waterplanten" Style="{StaticResource BigCheckText}" />
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <!-- Dubbel:
+                                    ListBoxItem Focusable="False"     
+                                                 <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxLevensvormenVorm2" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxLevensvormenVorm2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="/Image/Unknown.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Hydrofyten - waterplanten" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>-->
+
+                                <ListBoxItem Focusable="False">
+                                    <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                        <Viewbox>
+                                            <CheckBox x:Name="CbxLevensvormenVorm3"
+                                                      IsChecked="{Binding Path=SelectedCheckBoxLevensvormenVorm3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <CheckBox.Background>
+                                                    <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="/Image/Unknown.png"/>
+                                                </CheckBox.Background>
+                                            </CheckBox>
+                                        </Viewbox>
+                                        <TextBlock Text="Helofyten - winterknoppen onder water, bloeiende planten boven water" Style="{StaticResource BigCheckText}" Height="50"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False">
+                                    <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                        <Viewbox>
+                                            <CheckBox x:Name="CbxLevensvormenVorm4" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxLevensvormenVorm4, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <CheckBox.Background>
+                                                    <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="/Image/Unknown.png" />
+                                                </CheckBox.Background>
+                                            </CheckBox>
+                                        </Viewbox>
+                                        <TextBlock Text="Cryptofyten of Geofyten - winterknoppen onder de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+                                <!-- Dubbel:
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxLevensvormenVorm5" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxLevensvormenVorm5, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="/Image/Unknown.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Cryptofyten of Geofyten - winterknoppen onder de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                        </StackPanel>
+                                    </ListBoxItem>-->
+
+                                <ListBoxItem Focusable="False">
+                                    <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                        <Viewbox>
+                                            <CheckBox x:Name="CbxLevensvormenVorm6"
+                                                      IsChecked="{Binding Path=SelectedCheckBoxLevensvormenVorm6, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <CheckBox.Background>
+                                                    <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="/Image/Unknown.png"/>
+                                                </CheckBox.Background>
+                                            </CheckBox>
+                                        </Viewbox>
+                                        <TextBlock Text="HemiCryptofyten - winterknoppen op of iets onder de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+
+                                <ListBoxItem Focusable="False">
+                                    <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                        <Viewbox>
+                                            <CheckBox x:Name="CbxLevensvormenVorm7" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxLevensvormenVorm7, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <CheckBox.Background>
+                                                    <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="/Image/Unknown.png"/>
+                                                </CheckBox.Background>
+                                            </CheckBox>
+                                        </Viewbox>
+                                        <TextBlock Text="Chamaefyten - winterknoppen tot 50 cm boven de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+                                <!--Dubbel:
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox x:Name="CbxLevensvormenVorm8" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxLevensvormenVorm8, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="/Image/Unknown.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Chamaefyten - winterknoppen tot 50 cm boven de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                        </StackPanel>
+                                    </ListBoxItem>-->
+
+                                <ListBoxItem Focusable="False">
+                                    <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                        <Viewbox>
+                                            <CheckBox x:Name="CbxLevensvormenVorm9" 
+                                                      IsChecked="{Binding Path=SelectedCheckBoxLevensvormenVorm9, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <CheckBox.Background>
+                                                    <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="/Image/Unknown.png"/>
+                                                </CheckBox.Background>
+                                            </CheckBox>
+                                        </Viewbox>
+                                        <TextBlock Text="Phanerofyten - winterknoppen minstens 50 cm boven de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+                            </ListBox>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </GroupBox>
+    </Grid>
+</UserControl>

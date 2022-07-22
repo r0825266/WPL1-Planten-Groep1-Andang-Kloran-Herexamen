@@ -1,0 +1,1264 @@
+﻿<UserControl x:Class="Plantjes.Views.UserControls.UserControlPlantToevoegen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plantjes.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="950" d:DesignWidth="1220">
+    <Canvas Background="#FFA0A0A0">
+        <Viewbox Canvas.Top="10">
+            <Grid Width="1210" Height="980" >
+                <!--Plant Eignenschappen-->
+                <GroupBox
+                BorderThickness="0" Margin="10,10,780,610" >
+                    <Border Style="{StaticResource BorderBox}">
+                        <StackPanel >
+                            <Label Content="Alegmene plant eigenschappen" Style="{StaticResource LabelBorder}"/>
+                            <Grid Height="301">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Ontwikkelsnelheid"/>
+                                        <ComboBox Width="80">
+                                            <ComboBoxItem Content="traag"/>
+                                            <ComboBoxItem Content="matig"/>
+                                            <ComboBoxItem Content="snel"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Label Content="Optimale plantdichtheid tussen:"/>
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <TextBox Width="50"/>
+                                            <Label Content="en"/>
+                                            <TextBox Width="50"/>
+                                            <Label Content="Stuks/m²"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <ListBox Height="100" >
+                                        <ListBoxItem Focusable="False">
+                                            <Label Content="Bezonning:"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Z" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Z-HS" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="HS" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="HS-S" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="S" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                    </ListBox>
+                                    <ListBox Height="100">
+                                        <ListBoxItem Focusable="False">
+                                            <Label Content="Sociabiliteit:"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="1" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="2" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="3" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="4" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="5" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+
+                                        <ListBoxItem Focusable="False">
+                                            <Label Content="Habitat:"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="1" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="2" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="3" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="4" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="5" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                    </ListBox>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <ListBox Height="100" >
+                                        <ListBoxItem>
+                                            <Label Content="Strategie:"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="C" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="C-R" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="R" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="R-S" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="S" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="SC" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="CSR" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                    </ListBox>
+
+                                    <ListBox Height="100">
+                                        <ListBoxItem Focusable="False">
+                                            <Label Content="Voedingsbehoefte"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Arm" />
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Arm-Matig"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Matig"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Matig-Voedselrijk"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Voedselrijk"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Voedselrijk-Indifferent"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Indifferent"/>
+                                        </ListBoxItem>
+                                    </ListBox>
+
+                                    <ListBox Height="100" >
+                                        <ListBoxItem>
+                                            <Label Content="Vochtbehoefte:"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="C" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="C-R" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="R" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="R-S" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="S" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="SC" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="CSR" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                    </ListBox>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </GroupBox>
+
+                <!--Beheersdaad-->
+                <GroupBox
+                BorderThickness="0" Margin="692,10,324,633" >
+                    <Border Style="{StaticResource BorderBox}">
+                        <StackPanel >
+                            <Label Content="Beheersdaad" Style="{StaticResource LabelBorder}"/>
+                            <Grid Height="278">
+                                <StackPanel>
+                                    <ComboBox/>
+                                    <StackPanel>
+                                        <Label Content="Opmerking:"/>
+                                        <TextBox/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Label Content="Frequentie per jaar:"/>
+                                        <TextBox/>
+                                    </StackPanel>
+                                    <ListBox Height="166" >
+                                        <ListBoxItem>
+                                            <Label Content="Maand:"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Januari" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Februari" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Maart" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="April" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Mei" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Juni" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Juli" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Augustus" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="September" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="Oktober" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="November" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <CheckBox Margin="30,0,0,0" Content="December" VerticalContentAlignment="Center"/>
+                                        </ListBoxItem>
+                                    </ListBox>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </GroupBox>
+
+                <!--Levensduur-->
+                <GroupBox
+                BorderThickness="0" Margin="865,540,10,128" >
+                    <Border Style="{StaticResource BorderBox}">
+                        <StackPanel >
+                            <Label Content="Levensduur" Style="{StaticResource LabelBorder}"/>
+                            <Grid Height="255">
+                                <ListBox >
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="1. Zogenaamde bodembedekker,&#xD;&#xA; weinig verdraagzaam met andere planten" VerticalContentAlignment="Center"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="2. Verdraagzame bodembedekker,  &#xD;&#xA;ook voor een soortenrijke aanplant" VerticalContentAlignment="Center"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="3. Woekerende soort, worteluitlopers"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="4. Weinig of niet woekerend, goed te combineren"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="5. Robuuste, meestal grote plant, ook als solitair"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="6. Zich sterk uitzaaiende soort"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="7. Kortlevende plant"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="8. Geeft een goede snijbloem"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="9. Stelt meer eisen qua 'eten en drinken' &#xD;&#xA;of winterbescherming" VerticalContentAlignment="Center"/>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </GroupBox>
+
+                <!--Foto's-->
+                <GroupBox 
+                BorderThickness="0" Margin="10,354,780,440">
+                    <Grid>
+                        <Border Style="{StaticResource BorderBox}" >
+                            <StackPanel>
+                                <Label Content="Foto's" Style="{StaticResource LabelBorder}"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Margin="5,0,5,0">
+                                        <Label Content="Blad" Width="100" HorizontalContentAlignment="Center"/>
+                                        <Image HorizontalAlignment="Left" Height="100" Width="100" Source="../../Image/blad.jpg" Stretch="Fill"/>
+                                    </StackPanel>
+                                    <StackPanel Width="30"/>
+                                    <StackPanel Margin="0,0,5,0">
+                                        <Label Content="Bloei" Width="100" HorizontalContentAlignment="Center"/>
+                                        <Image Height="100" Width="100" Source="../../Image/bloem.jpg" Stretch="Fill"/>
+                                    </StackPanel>
+                                    <StackPanel Width="30"/>
+                                    <StackPanel Margin="0,0,5,0">
+                                        <Label Content="Habitus" Width="100" HorizontalContentAlignment="Center"/>
+                                        <Image Height="100" Width="100" Source="../../Image/plant.jpg" Stretch="Fill"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </GroupBox>
+
+                <!--Blad/bloem kleur-->
+                <GroupBox
+                BorderThickness="0" Margin="692,334,319,435" >
+                    <Border Style="{StaticResource BorderBox}">
+                        <StackPanel >
+                            <Label Content="KLEUR" Style="{StaticResource LabelBorder}"/>
+                            <Label Content="Blad                    Bloem   " Style="{StaticResource LabelBorder}"/>
+                            <Grid Height="167">
+                                <ListBox Margin="0,0,0,41" >
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="Black"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Zwart" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="Black"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="White"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Wit" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="White"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="Pink"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Roze" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="Pink"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="Red"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Rood" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="Red"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="Orange"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Oranje" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="Orange"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="Plum"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Lila" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="Plum"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="LightGray"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Grijs" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="LightGray"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="Green"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Groen" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="Green"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="Yellow"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Geel" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="Yellow"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="Blue"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Blauw" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="Blue"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="Violet"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Violet" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="Violet"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="Purple"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Paars" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="Purple"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelColour}">
+                                            <Viewbox>
+                                                <CheckBox Background="SaddleBrown"/>
+                                            </Viewbox>
+                                            <TextBlock Text="Bruin" Style="{StaticResource BigCheckTextColour}"/>
+                                            <Viewbox>
+                                                <CheckBox Background="SaddleBrown"/>
+                                            </Viewbox>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </GroupBox>
+
+                <!--Stengelvorm-->
+                <GroupBox 
+                BorderThickness="0" Margin="10,545,918,123">
+                    <Border Style="{StaticResource BorderBox}" >
+                        <StackPanel>
+                            <Label Content="Stengelvorm (selecteer op de figuur)" Style="{StaticResource LabelBorder}"/>
+                            <Grid Height="255">
+                                <ListBox>
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}" >
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="../../Image/tufted.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Tufted" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="../../Image/upright-arching.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Upright-arching" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="../../Image/arching.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Arching" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="../../Image/upright-divergent.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Upright-divergent" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="../../Image/upright-erect.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Upright-erect" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" ImageSource="../../Image/mounded.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Mounded" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </GroupBox>
+
+                <!--Bladvorml-->
+                <GroupBox 
+                BorderThickness="0" Margin="896,10,10,658">
+                    <Border Style="{StaticResource BorderBox}" >
+                        <StackPanel>
+                            <Label Content="Blad eigenschappen" Style="{StaticResource LabelBorder}"/>
+                            <Grid Height="255">
+                                <StackPanel>
+                                    <StackPanel>
+                                        <Label Content="Bladhoogte:"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Min:"/>
+                                            <ComboBox Width="80">
+                                                <ComboBoxItem Content="240/250"/>
+                                                <ComboBoxItem Content="230/239"/>
+                                                <ComboBoxItem Content="220/229"/>
+                                                <ComboBoxItem Content="210/219"/>
+                                                <ComboBoxItem Content="200/209"/>
+                                                <ComboBoxItem Content="190/199"/>
+                                                <ComboBoxItem Content="180/189"/>
+                                                <ComboBoxItem Content="170/179"/>
+                                                <ComboBoxItem Content="160/169"/>
+                                                <ComboBoxItem Content="150/159"/>
+                                                <ComboBoxItem Content="140/149"/>
+                                                <ComboBoxItem Content="130/139"/>
+                                                <ComboBoxItem Content="120/129"/>
+                                                <ComboBoxItem Content="110/119"/>
+                                                <ComboBoxItem Content="100/109"/>
+                                                <ComboBoxItem Content="90/99"/>
+                                                <ComboBoxItem Content="80/89"/>
+                                                <ComboBoxItem Content="70/79"/>
+                                                <ComboBoxItem Content="60/69"/>
+                                                <ComboBoxItem Content="50/59"/>
+                                                <ComboBoxItem Content="40/49"/>
+                                                <ComboBoxItem Content="30/39"/>
+                                                <ComboBoxItem Content="20/29"/>
+                                                <ComboBoxItem Content="10/19"/>
+                                                <ComboBoxItem Content="0/9"/>
+                                            </ComboBox>
+                                            <Label Content="Max:"/>
+                                            <ComboBox Width="80">
+                                                <ComboBoxItem Content="240/250"/>
+                                                <ComboBoxItem Content="230/239"/>
+                                                <ComboBoxItem Content="220/229"/>
+                                                <ComboBoxItem Content="210/219"/>
+                                                <ComboBoxItem Content="200/209"/>
+                                                <ComboBoxItem Content="190/199"/>
+                                                <ComboBoxItem Content="180/189"/>
+                                                <ComboBoxItem Content="170/179"/>
+                                                <ComboBoxItem Content="160/169"/>
+                                                <ComboBoxItem Content="150/159"/>
+                                                <ComboBoxItem Content="140/149"/>
+                                                <ComboBoxItem Content="130/139"/>
+                                                <ComboBoxItem Content="120/129"/>
+                                                <ComboBoxItem Content="110/119"/>
+                                                <ComboBoxItem Content="100/109"/>
+                                                <ComboBoxItem Content="90/99"/>
+                                                <ComboBoxItem Content="80/89"/>
+                                                <ComboBoxItem Content="70/79"/>
+                                                <ComboBoxItem Content="60/69"/>
+                                                <ComboBoxItem Content="50/59"/>
+                                                <ComboBoxItem Content="40/49"/>
+                                                <ComboBoxItem Content="30/39"/>
+                                                <ComboBoxItem Content="20/29"/>
+                                                <ComboBoxItem Content="10/19"/>
+                                                <ComboBoxItem Content="0/9"/>
+                                            </ComboBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <ListBox Height="201">
+                                        <ListBoxItem Focusable="False">
+                                            <Label Content="Bladvorm (selecteer op de figuur)"/>
+                                        </ListBoxItem>
+                                        <ListBoxItem Focusable="False">
+                                            <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                                <Viewbox>
+                                                    <CheckBox>
+                                                        <CheckBox.Background>
+                                                            <ImageBrush  Stretch="Uniform" ImageSource="../../Image/kruipend, horizontaal groeiend of  mattenvormend.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                        </CheckBox.Background>
+                                                    </CheckBox>
+                                                </Viewbox>
+                                                <TextBlock Text="Kruipend, horizontaal groeiend of mattenvormend" Style="{StaticResource BigCheckText}" Height="30"/>
+                                            </StackPanel>
+                                        </ListBoxItem>
+
+                                        <ListBoxItem Focusable="False">
+                                            <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                                <Viewbox>
+                                                    <CheckBox>
+                                                        <CheckBox.Background>
+                                                            <ImageBrush  Stretch="Uniform" ImageSource="../../Image/rond of waaiervormig.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                        </CheckBox.Background>
+                                                    </CheckBox>
+                                                </Viewbox>
+                                                <TextBlock Text="Rond of waaiervormig" Style="{StaticResource BigCheckText}"/>
+                                            </StackPanel>
+                                        </ListBoxItem>
+
+                                        <ListBoxItem Focusable="False">
+                                            <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                                <Viewbox>
+                                                    <CheckBox>
+                                                        <CheckBox.Background>
+                                                            <ImageBrush  Stretch="Uniform" ImageSource="../../Image/kussenvormend.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                        </CheckBox.Background>
+                                                    </CheckBox>
+                                                </Viewbox>
+                                                <TextBlock Text="Kussenvormend" Style="{StaticResource BigCheckText}"/>
+                                            </StackPanel>
+                                        </ListBoxItem>
+
+                                        <ListBoxItem Focusable="False">
+                                            <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                                <Viewbox>
+                                                    <CheckBox>
+                                                        <CheckBox.Background>
+                                                            <ImageBrush  Stretch="Uniform" ImageSource="../../Image/zuilvormig.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                        </CheckBox.Background>
+                                                    </CheckBox>
+                                                </Viewbox>
+                                                <TextBlock Text="Zuilvormig" Style="{StaticResource BigCheckText}"/>
+                                            </StackPanel>
+                                        </ListBoxItem>
+
+                                        <ListBoxItem Focusable="False">
+                                            <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                                <Viewbox>
+                                                    <CheckBox>
+                                                        <CheckBox.Background>
+                                                            <ImageBrush  Stretch="Uniform" ImageSource="../../Image/uitbuigend.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                        </CheckBox.Background>
+                                                    </CheckBox>
+                                                </Viewbox>
+                                                <TextBlock Text="Uitbuigend" Style="{StaticResource BigCheckText}"/>
+                                            </StackPanel>
+                                        </ListBoxItem>
+
+                                        <ListBoxItem Focusable="False">
+                                            <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                                <Viewbox>
+                                                    <CheckBox>
+                                                        <CheckBox.Background>
+                                                            <ImageBrush  Stretch="Uniform" ImageSource="../../Image/wortel rozet-planten.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                        </CheckBox.Background>
+                                                    </CheckBox>
+                                                </Viewbox>
+                                                <TextBlock Text="wortel rozet-planten" Style="{StaticResource BigCheckText}"/>
+                                            </StackPanel>
+                                        </ListBoxItem>
+
+                                        <ListBoxItem Focusable="False">
+                                            <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                                <Viewbox>
+                                                    <CheckBox>
+                                                        <CheckBox.Background>
+                                                            <ImageBrush  Stretch="Uniform" ImageSource="../../Image/succulenten.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                        </CheckBox.Background>
+                                                    </CheckBox>
+                                                </Viewbox>
+                                                <TextBlock Text="Succulenten" Style="{StaticResource BigCheckText}"/>
+                                            </StackPanel>
+                                        </ListBoxItem>
+
+                                        <ListBoxItem Focusable="False">
+                                            <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                                <Viewbox>
+                                                    <CheckBox>
+                                                        <CheckBox.Background>
+                                                            <ImageBrush  Stretch="Uniform" ImageSource="../../Image/pollenvormers.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                        </CheckBox.Background>
+                                                    </CheckBox>
+                                                </Viewbox>
+                                                <TextBlock Text="Pollenvormers" Style="{StaticResource BigCheckText}"/>
+                                            </StackPanel>
+                                        </ListBoxItem>
+
+                                        <ListBoxItem Focusable="False">
+                                            <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                                <Viewbox>
+                                                    <CheckBox>
+                                                        <CheckBox.Background>
+                                                            <ImageBrush  Stretch="Uniform" ImageSource="../../Image/parasolvormig.png" AlignmentX="Center" AlignmentY="Center"/>
+                                                        </CheckBox.Background>
+                                                    </CheckBox>
+                                                </Viewbox>
+                                                <TextBlock Text="Parasolvormig" Style="{StaticResource BigCheckText}"/>
+                                            </StackPanel>
+                                        </ListBoxItem>
+                                    </ListBox>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </GroupBox>
+
+                <!--Grondsoort-->
+                <GroupBox
+                BorderThickness="0" Margin="896,327,10,437">
+                    <Border Style="{StaticResource BorderBox}">
+                        <StackPanel >
+                            <Label Content="Grondsoort" Style="{StaticResource LabelBorder}"/>
+                            <Grid Height="255">
+                                <ListBox >
+                                    <ListBoxItem Content="Gemengde boord met:" Focusable="False"/>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="droge bodem GB1" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="frisse bodem GB2" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="vochtige bodem GB3" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Content="Open plaats met:" Focusable="False"/>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="droge bodem OP1" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="droge bodem OP1B" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="frisse bodem OP2" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="frisse bodem OP2B" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="vochtige bodem OP3" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="vochtige bodem OP3B" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Content="Steppe met:" Focusable="False"/>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="droge bodem SH1" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="frisse bodem SH2" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Content="Bos en onder bomen met:" Focusable="False"/>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="droge bodem B1" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="frisse bodem B2" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="vochtige bodem B3" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Content="Bodem met grind met:" Focusable="False"/>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="droge bodem GR1" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="frisse bodem GR2" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Content="Heide met:" Focusable="False"/>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="droge bodem H1" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="frisse bodem H2" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Content="Stenige:" Focusable="False"/>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="droge bodem ST1" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="frisse bodem ST2" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Content="Bosrand met:" Focusable="False"/>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="droge bodem BR1" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="frisse bodem BR2" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="vochtige bodem BR3" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Content="Ondiepe:" Focusable="False"/>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="en droge bodem OB1" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem Focusable="False">
+                                        <CheckBox Content="frisse bodem OB2" Margin="30,0,0,0"/>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </GroupBox>
+
+                <!--Bloeiwijze-->
+                <GroupBox 
+                BorderThickness="0" Margin="292,540,634,128">
+                    <Border Style="{StaticResource BorderBox}">
+                        <StackPanel>
+                            <Label Content="Bloeiwijze (selecteer op de figuur)" Style="{StaticResource LabelBorder}"/>
+                            <Grid Height="255">
+                                <ListBox>
+                                    <ListBoxItem Focusable="False" >
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox IsChecked="{Binding Path=SelectedCheckBoxBloeiwijzeVorm1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/aar.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Aar" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox IsChecked="{Binding Path=SelectedCheckBoxBloeiwijzeVorm2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Schermbloemig.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Schermbloemig" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox IsChecked="{Binding Path=SelectedCheckBoxBloeiwijzeVorm3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Pluim.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Pluim" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox IsChecked="{Binding Path=SelectedCheckBoxBloeiwijzeVorm4, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Bol of Knop.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Bol of Knop" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox IsChecked="{Binding Path=SelectedCheckBoxBloeiwijzeVorm5, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Margrietachtig.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Margrietachtig" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox IsChecked="{Binding Path=SelectedCheckBoxBloeiwijzeVorm6, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform" AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Transparant.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Transparant" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </GroupBox>
+
+                <!--Levensvorm-->
+                <GroupBox 
+                BorderThickness="0" Margin="576,540,345,128" >
+                    <Border Style="{StaticResource BorderBox}">
+                        <StackPanel>
+                            <Label Content="Levensvorm (selecteer op de figuur)" Style="{StaticResource LabelBorder}"/>
+                            <Grid Height="255">
+                                <ListBox>
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Unknown.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Hydrofyten - waterplanten" Style="{StaticResource BigCheckText}" />
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Unknown.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Hydrofyten - waterplanten" Style="{StaticResource BigCheckText}"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Unknown.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Helofyten - winterknoppen onder water, bloeiende planten boven water" Style="{StaticResource BigCheckText}" Height="50"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Unknown.png" />
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Cryptofyten of Geofyten - winterknoppen onder de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Unknown.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Cryptofyten of Geofyten - winterknoppen onder de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Unknown.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="HemiCryptofyten - winterknoppen op of iets onder de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Unknown.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Chamaefyten - winterknoppen tot 50 cm boven de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Unknown.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Chamaefyten - winterknoppen tot 50 cm boven de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                    <ListBoxItem Focusable="False">
+                                        <StackPanel Style="{StaticResource StackPanelListCheckBox}">
+                                            <Viewbox>
+                                                <CheckBox>
+                                                    <CheckBox.Background>
+                                                        <ImageBrush  Stretch="Uniform"  AlignmentX="Center" AlignmentY="Center" ImageSource="../../Image/Unknown.png"/>
+                                                    </CheckBox.Background>
+                                                </CheckBox>
+                                            </Viewbox>
+                                            <TextBlock Text="Phanerofyten - winterknoppen minstens 50 cm boven de grond" Style="{StaticResource BigCheckText}" Height="50"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+
+                                </ListBox>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </GroupBox>
+
+                <!--Bloem eigenschappen-->
+                <GroupBox 
+                BorderThickness="0" Margin="430,10,518,440">
+                    <Border Style="{StaticResource BorderBox}" >
+                        <StackPanel>
+                            <Label Content="Bloem eigenschappen" Style="{StaticResource LabelBorder}"/>
+                            <CheckBox Content="Eetbaar/kruidgebruik"/>
+                            <CheckBox Content="Bijvriendelijk"/>
+                            <CheckBox Content="Geurend"/>
+                            <CheckBox Content="Vlindervriendelijk"/>
+                            <CheckBox Content="Vorstgevoelig"/>
+                            <StackPanel>
+                                <Label Content="Nectarwaarde:"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Min:"/>
+                                    <ComboBox Width="80">
+                                        <ComboBoxItem Content="1"/>
+                                        <ComboBoxItem Content="2"/>
+                                        <ComboBoxItem Content="3"/>
+                                        <ComboBoxItem Content="4"/>
+                                        <ComboBoxItem Content="5"/>
+                                    </ComboBox>
+                                    <Label Content="Max:"/>
+                                    <ComboBox Width="80">
+                                        <ComboBoxItem Content="1"/>
+                                        <ComboBoxItem Content="2"/>
+                                        <ComboBoxItem Content="3"/>
+                                        <ComboBoxItem Content="4"/>
+                                        <ComboBoxItem Content="5"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="Pollenwaarde:"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Min:"/>
+                                    <ComboBox Width="80">
+                                        <ComboBoxItem Content="1"/>
+                                        <ComboBoxItem Content="2"/>
+                                        <ComboBoxItem Content="3"/>
+                                        <ComboBoxItem Content="4"/>
+                                        <ComboBoxItem Content="5"/>
+                                    </ComboBox>
+                                    <Label Content="Max:"/>
+                                    <ComboBox Width="80">
+                                        <ComboBoxItem Content="1"/>
+                                        <ComboBoxItem Content="2"/>
+                                        <ComboBoxItem Content="3"/>
+                                        <ComboBoxItem Content="4"/>
+                                        <ComboBoxItem Content="5"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="Bloeihoogte:"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Min:"/>
+                                    <ComboBox Width="80">
+                                        <ComboBoxItem Content="240/250"/>
+                                        <ComboBoxItem Content="230/239"/>
+                                        <ComboBoxItem Content="220/229"/>
+                                        <ComboBoxItem Content="210/219"/>
+                                        <ComboBoxItem Content="200/209"/>
+                                        <ComboBoxItem Content="190/199"/>
+                                        <ComboBoxItem Content="180/189"/>
+                                        <ComboBoxItem Content="170/179"/>
+                                        <ComboBoxItem Content="160/169"/>
+                                        <ComboBoxItem Content="150/159"/>
+                                        <ComboBoxItem Content="140/149"/>
+                                        <ComboBoxItem Content="130/139"/>
+                                        <ComboBoxItem Content="120/129"/>
+                                        <ComboBoxItem Content="110/119"/>
+                                        <ComboBoxItem Content="100/109"/>
+                                        <ComboBoxItem Content="90/99"/>
+                                        <ComboBoxItem Content="80/89"/>
+                                        <ComboBoxItem Content="70/79"/>
+                                        <ComboBoxItem Content="60/69"/>
+                                        <ComboBoxItem Content="50/59"/>
+                                        <ComboBoxItem Content="40/49"/>
+                                        <ComboBoxItem Content="30/39"/>
+                                        <ComboBoxItem Content="20/29"/>
+                                        <ComboBoxItem Content="10/19"/>
+                                        <ComboBoxItem Content="0/9"/>
+                                    </ComboBox>
+                                    <Label Content="Max:"/>
+                                    <ComboBox Width="80">
+                                        <ComboBoxItem Content="240/250"/>
+                                        <ComboBoxItem Content="230/239"/>
+                                        <ComboBoxItem Content="220/229"/>
+                                        <ComboBoxItem Content="210/219"/>
+                                        <ComboBoxItem Content="200/209"/>
+                                        <ComboBoxItem Content="190/199"/>
+                                        <ComboBoxItem Content="180/189"/>
+                                        <ComboBoxItem Content="170/179"/>
+                                        <ComboBoxItem Content="160/169"/>
+                                        <ComboBoxItem Content="150/159"/>
+                                        <ComboBoxItem Content="140/149"/>
+                                        <ComboBoxItem Content="130/139"/>
+                                        <ComboBoxItem Content="120/129"/>
+                                        <ComboBoxItem Content="110/119"/>
+                                        <ComboBoxItem Content="100/109"/>
+                                        <ComboBoxItem Content="90/99"/>
+                                        <ComboBoxItem Content="80/89"/>
+                                        <ComboBoxItem Content="70/79"/>
+                                        <ComboBoxItem Content="60/69"/>
+                                        <ComboBoxItem Content="50/59"/>
+                                        <ComboBoxItem Content="40/49"/>
+                                        <ComboBoxItem Content="30/39"/>
+                                        <ComboBoxItem Content="20/29"/>
+                                        <ComboBoxItem Content="10/19"/>
+                                        <ComboBoxItem Content="0/9"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </StackPanel>
+                            <ListBox Height="239" >
+                                <ListBoxItem>
+                                    <Label Content="Bloeit in:"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Januari" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Februari" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Maart" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="April" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Mei" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Juni" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Juli" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Augustus" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="September" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="Oktober" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="November" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                                <ListBoxItem Focusable="False">
+                                    <CheckBox Content="December" VerticalContentAlignment="Center"/>
+                                </ListBoxItem>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </GroupBox>
+
+                <Button Width="240" Content="Plant inzenden" Style="{StaticResource ButtonUnified}" Margin="31,862,939,58"/>
+            </Grid>
+        </Viewbox>
+    </Canvas>
+</UserControl>

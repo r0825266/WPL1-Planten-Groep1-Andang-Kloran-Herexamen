@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Plantjes.Views.UserControls.Beheer.UserControlUserManagement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Plantjes.Views.UserControls.Beheer"
+             mc:Ignorable="d"
+             d:DesignHeight="720"
+             d:DesignWidth="1200">
+    <!-- Written by Kjell-->
+    <Grid>
+        <Border Style="{StaticResource BorderBox}" Margin="10,100,739,10" Name="BorderListbox">
+            <ListBox
+                Visibility="Visible" Background="#99FFFFFF" FontWeight="Bold"
+                FontSize="14" Width="455" HorizontalAlignment="Center" Height="637"
+                VerticalAlignment="Center" ItemsSource="{Binding users}" SelectedItem="{Binding currentUser}" DisplayMemberPath="DisplayNameWithNr" />
+        </Border>
+        <Border Style="{StaticResource BorderBox}" Margin="480,100,480,10">
+            <Canvas>
+                <Grid Height="604" Width="234">
+                    <Button Content="Nieuw"
+                            Style="{StaticResource ButtonUnified}" Margin="0,160,0,0"
+                            HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding NewUserCommand}" />
+                    <Button Content="Verwijderen"
+                            Style="{StaticResource ButtonUnified}"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding DeleteCommand}" />
+                    <Button Content="CSV Importeren"
+                            Style="{StaticResource ButtonUnified}" Command="{Binding ImportCsvCommand}"
+                            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,560,0,0" Height="34" />
+                </Grid>
+            </Canvas>
+
+        </Border>
+        <Border Style="{StaticResource BorderBox}" Margin="739,100,10,10">
+            <Grid>
+                <StackPanel Margin="10,60,225,6">
+                    <Label Content="Vives Nr:" Height="40" Style="{StaticResource LabelGegevensGebruiker}" Margin="0,0,0,0" Width="113" />
+                    <Label Content="Voornaam:" Height="40" Style="{StaticResource LabelGegevensGebruiker}" Margin="-29,10,0,0" Width="142" />
+                    <Label Content="Achternaam:" Height="40" Style="{StaticResource LabelGegevensGebruiker}" RenderTransformOrigin="0.5,0.5" Margin="-58,10,0,0" Width="177" />
+                    <Label Content="E-mailadres:" Height="40" Style="{StaticResource LabelGegevensGebruiker}" RenderTransformOrigin="0.5,0.5" Margin="-46,10,0,0" Width="165" />
+                    <Label Content="Wachtwoord:" Height="40" Style="{StaticResource LabelGegevensGebruiker}" RenderTransformOrigin="0.5,0.5" Margin="-52,10,0,0" Width="170" VerticalAlignment="Stretch" />
+                </StackPanel>
+                <StackPanel Margin="119,60,-2,10">
+                    <TextBox TextWrapping="Wrap" Text="{Binding currentUser.Vivesnr}" Width="260" Height="40" FontSize="16"
+                             BorderThickness="0" Margin="44,0,0,0" />
+                    <TextBox TextWrapping="Wrap" Text="{Binding currentUser.Voornaam}" Width="260" Height="40" FontSize="16"
+                             BorderThickness="0" Margin="44,10,0,0" />
+                    <TextBox TextWrapping="Wrap" Text="{Binding currentUser.Achternaam}" Width="260" Height="40" FontSize="16"
+                             BorderThickness="0" Margin="44,10,0,0" />
+                    <TextBox TextWrapping="Wrap" Text="{Binding currentUser.Emailadres}" Width="260" Height="40" FontSize="16"
+                             BorderThickness="0" Margin="44,10,0,0" />
+                    <TextBox TextWrapping="Wrap" Text="" IsEnabled="false" Width="260" Height="40" FontSize="16"
+                             BorderThickness="0" Margin="44,10,0,0" />
+
+
+                    <Button Content="Opslaan"
+                            Style="{StaticResource ButtonUnified}" Command="{Binding SaveUserCommand}" Height="34" Margin="95,10,0,0" />
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Label Content="Lijst met gebruikers" FontSize="17" Height="44" Margin="10,0,965,658" VerticalAlignment="Bottom" Style="{StaticResource LabelBorderTitle}">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Label Content="Gegevens van de gebruiker" FontSize="17" Height="44" Margin="890,0,10,658" VerticalAlignment="Bottom" Style="{StaticResource LabelBorderTitle}">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+    </Grid>
+</UserControl>

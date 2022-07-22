@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <ApplicationIcon>2470011.ico</ApplicationIcon>
+        <!--<Optimize>true</Optimize>
+        <WholeProgramOptimization>true</WholeProgramOptimization>-->
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <Configurations>Debug;Release;Debug Auto Login</Configurations>
+        <LangVersion>preview</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="2470011.ico"/>
+<Resource Include="Image/aar.png" />
+<Resource Include="Image/arching.png" />
+<Resource Include="Image/blad.jpg" />
+<Resource Include="Image/bloem.jpg" />
+<Resource Include="Image/bol of knop.png" />
+<Resource Include="Image/kruipend, horizontaal groeiend of  mattenvormend.png" />
+<Resource Include="Image/kussenvormend.png" />
+<Resource Include="Image/margrietachtig.png" />
+<Resource Include="Image/mounded.png" />
+<Resource Include="Image/parasolvormig.png" />
+<Resource Include="Image/plant.jpg" />
+<Resource Include="Image/pluim.png" />
+<Resource Include="Image/pollenvormers.png" />
+<Resource Include="Image/rond of waaiervormig.png" />
+<Resource Include="Image/schermbloemig.png" />
+<Resource Include="Image/succulenten.png" />
+<Resource Include="Image/transparant.png" />
+<Resource Include="Image/tufted.png" />
+<Resource Include="Image/uitbuigend.png" />
+<Resource Include="Image/Unknown.png" />
+<Resource Include="Image/upright-arching.png" />
+<Resource Include="Image/upright-divergent.png" />
+<Resource Include="Image/upright-erect.png" />
+<Resource Include="Image/user.png" />
+<Resource Include="Image/vives.png" />
+<Resource Include="Image/vives_big.png" />
+<Resource Include="Image/Vives_Logo_MainWindow.png" />
+<Resource Include="Image/WachtwoordOog.png" />
+<Resource Include="Image/WachtwoordOog1.png" />
+<Resource Include="Image/wortel rozet-planten.png" />
+<Resource Include="Image/zuilvormig.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="DevExpress.Data" Version="21.2.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.1" />
+        <PackageReference Include="XAct.Core.PCL" Version="0.0.5014" />
+    </ItemGroup>
+
+</Project>
