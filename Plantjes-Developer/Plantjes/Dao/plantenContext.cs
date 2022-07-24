@@ -10,6 +10,7 @@ namespace Plantjes.Models.Db
     {
         public plantenContext()
         {
+
         }
 
         public plantenContext(DbContextOptions<plantenContext> options)
