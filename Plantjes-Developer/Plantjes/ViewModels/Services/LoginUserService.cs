@@ -28,25 +28,55 @@ public class LoginUserService : INotifyPropertyChanged {
         var Message = string.Empty;
         //checken of alle velden ingevuld zijn
         if (vivesNrInput != null && firstNameInput != null && lastNameInput != null && emailAdresInput != null && passwordInput != null && passwordRepeatInput != null) {
-            //checken als het emailadres een geldig vives email is.
+
+                //checken als het emailadres een geldig vives email is.
             if (emailAdresInput != null && emailAdresInput.Contains(".") && emailAdresInput.Contains("@")
                 //checken als het email adres al bestaat of niet.
 
                 && !DAOUser.GetEmailInUse(emailAdresInput)) {
                 if ((vivesNrInput != null) & (vivesNrInput.Length != 8)) return "Dit is geen geldig vives nummer!";
 
-                //checken als het herhaalde wachtwoord klopt of niet.
-                if (passwordInput == passwordRepeatInput) {
-                    //gebruiker registreren.
-                    DAOUser.RegisterUser(vivesNrInput, firstNameInput, lastNameInput, emailAdresInput, passwordInput, last_login: System.DateTime.Today);
-                    //Message = $"{firstNameInput}, je bent succevol geregistreerd,"+"\r\n"+$" uw gebruikersnaam is {emailAdresInput}." + 
-                    // "\r\n" + $" {firstNameInput}, je kan dit venster wegklikken en inloggen.";
-                    var loginWindow = new LoginWindow();
-                    loginWindow.Show();
-                } //foutafhandeling
-                else {
-                    Message = "Zorg dat de wachtwoorden overeenkomen.";
+                //Password validation
+                // Written by Andang Kloran
+
+                //Password cannot be empty
+                if (passwordInput != string.Empty)
+                {
+                    //Password must be atleast 8 characters long, must contain an uppercase letter and a symbol
+                    if (passwordInput.Length >= 8 && passwordInput.Any(char.IsUpper))
+                    {
+                        if (passwordInput.Any(char.IsSymbol) || passwordInput.IndexOfAny(new char[] { ',', '/', '\\', '.', '~', '@', '#', '%', '^', '*', '&' }) >= 0)
+                        {
+                            //checken als het herhaalde wachtwoord klopt of niet.
+                            if (passwordInput == passwordRepeatInput)
+                            {
+                                //gebruiker registreren.
+                                DAOUser.RegisterUser(vivesNrInput, firstNameInput, lastNameInput, emailAdresInput, passwordInput, last_login: System.DateTime.Today);
+                                //Message = $"{firstNameInput}, je bent succevol geregistreerd,"+"\r\n"+$" uw gebruikersnaam is {emailAdresInput}." + 
+                                // "\r\n" + $" {firstNameInput}, je kan dit venster wegklikken en inloggen.";
+                                var loginWindow = new LoginWindow();
+                                loginWindow.Show();
+                            } //foutafhandeling
+                            else
+                            {
+                                Message = "Zorg dat de wachtwoorden overeenkomen.";
+                            }
+                        }
+                        else
+                        {
+                            Message = "Wachtwoord moet minimaal 8 tekens lang zijn, moet een hoofdletter en een speciaal teken bevatten.";
+                        }            
+                    }
+                    else
+                    {
+                        Message = "Wachtwoord moet minimaal 8 tekens lang zijn, moet een hoofdletter en een speciaal teken bevatten.";
+                    }
                 }
+                else
+                {
+                    Message = "Voer een wachtwoord in alstublieft!";
+                }
+      
             }
             else {
                 Message = $"Fout! Emailadres is ongeldig, of is al in gebruik.";
@@ -58,11 +88,6 @@ public class LoginUserService : INotifyPropertyChanged {
 
         return Message;
     }
-        
-
-
-        
-
     #endregion
 
     #region Login Region
