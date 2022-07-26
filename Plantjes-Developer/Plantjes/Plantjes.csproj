@@ -13,7 +13,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Content Include="2470011.ico"/>
+      <None Remove="Views\Home\ChangePasswordLogo.jpg" />
+      <None Remove="Views\Home\logout-sign-out-icon-in-line-style-vector.jpg" />
+      <None Remove="Views\Home\LogoutLogo.jpg" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="2470011.ico" />
 <Resource Include="Image/aar.png" />
 <Resource Include="Image/arching.png" />
 <Resource Include="Image/blad.jpg" />
@@ -45,6 +51,8 @@
 <Resource Include="Image/WachtwoordOog1.png" />
 <Resource Include="Image/wortel rozet-planten.png" />
 <Resource Include="Image/zuilvormig.png" />
+<Resource Include="Image\LogoutLogo.jpg" />
+<Resource Include="Image\ChangePasswordLogo.jpg" />
     </ItemGroup>
 
     <ItemGroup>

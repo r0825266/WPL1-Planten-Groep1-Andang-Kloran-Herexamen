@@ -27,10 +27,12 @@ public class ViewModelMain : ViewModelBase {
 
         // <-- Written by ANDANG KLORAN--> Code for displaying the AddPlantWindow when the "Plant Toevoegen" button is clicked on the MainWindow
         AddPlantCommand = new RelayCommand(AddPlantButtonView);
+        LogoutCommand = new RelayCommand(LogoutButtonView);
 
     }
 
     public RelayCommand AddPlantCommand { get; set; }
+    public RelayCommand LogoutCommand { get; set; }
     private void AddPlantButtonView()
     {
         var addPlantWindow = new AddPlantWindow();
@@ -39,6 +41,21 @@ public class ViewModelMain : ViewModelBase {
        
     }
 
+    private void LogoutButtonView()
+    {
+        MessageBoxResult messageBoxResult = MessageBox.Show("Weet u zeker dat u wilt uitloggen?", "Uitloggen", MessageBoxButton.OKCancel);
+
+        if (messageBoxResult == MessageBoxResult.OK)
+        {
+            var loginWindow = new LoginWindow();
+            loginWindow.Show();
+            Application.Current.Windows[0]?.Close();
+        }
+        else if (messageBoxResult == MessageBoxResult.Cancel)
+        {
+            return;
+        }
+    }
     //End----------------------------------------------------------------------------------------------
 
     public MyICommand<string> mainNavigationCommand { get; set; }
