@@ -93,11 +93,29 @@
             <Grid x:Name="MainContent" HorizontalAlignment="Left" Width="1230" Margin="10,101,0,0" Height="773" VerticalAlignment="Top" Grid.ColumnSpan="2">
                 <ContentControl Content="{Binding currentViewModel}" HorizontalAlignment="Left" Width="1210" Height="754" VerticalAlignment="Center" Margin="10,0,0,0" />
             </Grid>
-            <Label x:Name="lblLogin" Content="{Binding loggedInMessage}" Grid.Column="1" Margin="0,14,95,0" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="40" Width="Auto" Foreground="Black" FontStretch="UltraExpanded" FontSize="19" />
-            <Label Content="{Binding rol}" Grid.Column="1" Margin="0,36,95,0" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="40" Width="Auto" Foreground="Black" FontStretch="UltraExpanded" FontSize="19" />
-            <Image x:Name="imgUser" Grid.Column="1" Margin="1087,23,-4,815" Source="../../Image/user.png" />
-            <Image Margin="13,17,1155,803" Grid.ColumnSpan="2" Source="../../Image/vives.png" />
-            <Image x:Name="img_vives_logo_main" Grid.Column="1" Margin="140,298,140,207" Source="/Views/Home/Vives_Logo_MainWindow.png" />
+            <Label x:Name="lblLogin" Content="{Binding loggedInMessage}" Grid.Column="1" Margin="0,14,140,0" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="40" Width="Auto" Foreground="Black" FontStretch="UltraExpanded" FontSize="19" />
+            <Label Content="{Binding rol}" Grid.Column="1" Margin="0,36,140,0" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="40" Width="Auto" Foreground="Black" FontStretch="UltraExpanded" FontSize="19" />
+            <Image x:Name="imgUser" Grid.Column="1" Margin="980,23,-4,815" Source="../../Image/user.png" />
+            
+            <!--Dropdown menu for logout and password change (with the Corresponding bindings)-->
+            <!--Written by Andang Kloran-->
+            <Menu Grid.Column="1" Margin="1120,23,-4,815" Height="25" Width="50" HorizontalAlignment="Right" Background="#FFA0A0A0">
+                <MenuItem Header="●●●" Background="#FFA0A0A0">
+                    <MenuItem Header="Wachtwoord veranderen">
+                        <MenuItem.Icon>
+                            <Image Source="/Image/ChangePasswordLogo.jpg"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Uitloggen" Command="{Binding LogoutCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="/Image/LogoutLogo.jpg"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+            
+            <Image Margin="-25,17,1155,803" Grid.ColumnSpan="2" Source="../../Image/vives.png" />
+            <Image x:Name="img_vives_logo_main" Grid.Column="1" Margin="140,298,140,207" Source="/Image/Vives_Logo_MainWindow.png" />
         </Grid>
     </Viewbox>
 </Window>
