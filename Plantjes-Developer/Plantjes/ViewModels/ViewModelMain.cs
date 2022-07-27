@@ -25,22 +25,22 @@ public class ViewModelMain : ViewModelBase {
 
         mainNavigationCommand = new MyICommand<string>(_onNavigationChanged);
 
-        // <-- Written by ANDANG KLORAN--> Code for displaying the AddPlantWindow when the "Plant Toevoegen" button is clicked on the MainWindow
+        // <-- Written by ANDANG KLORAN--> Navigation to the AddPlantWindow, LoginWindow and ChangePasswordWindow
         AddPlantCommand = new RelayCommand(AddPlantButtonView);
         LogoutCommand = new RelayCommand(LogoutButtonView);
+        WachtwoordVeranderingCommand = new RelayCommand(VeranderWachtwoordButtonView);
 
     }
 
     public RelayCommand AddPlantCommand { get; set; }
     public RelayCommand LogoutCommand { get; set; }
+    public RelayCommand WachtwoordVeranderingCommand { get; set; }
     private void AddPlantButtonView()
     {
         var addPlantWindow = new AddPlantWindow();
         addPlantWindow.Show();
         Application.Current.Windows[0]?.Close();
-       
     }
-
     private void LogoutButtonView()
     {
         MessageBoxResult messageBoxResult = MessageBox.Show("Weet u zeker dat u wilt uitloggen?", "Uitloggen", MessageBoxButton.OKCancel);
@@ -55,6 +55,12 @@ public class ViewModelMain : ViewModelBase {
         {
             return;
         }
+    }
+    private void VeranderWachtwoordButtonView()
+    {
+        var changePasswordWindow = new ChangePasswordWindow();
+        changePasswordWindow.Show();
+        Application.Current.Windows[0]?.Close();
     }
     //End----------------------------------------------------------------------------------------------
 

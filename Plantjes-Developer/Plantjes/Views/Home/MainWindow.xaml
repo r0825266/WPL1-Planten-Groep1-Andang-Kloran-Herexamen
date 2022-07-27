@@ -101,7 +101,7 @@
             <!--Written by Andang Kloran-->
             <Menu Grid.Column="1" Margin="1120,23,-4,815" Height="25" Width="50" HorizontalAlignment="Right" Background="#FFA0A0A0">
                 <MenuItem Header="●●●" Background="#FFA0A0A0">
-                    <MenuItem Header="Wachtwoord veranderen">
+                    <MenuItem Header="Wachtwoord veranderen" Command="{Binding WachtwoordVeranderingCommand}">
                         <MenuItem.Icon>
                             <Image Source="/Image/ChangePasswordLogo.jpg"/>
                         </MenuItem.Icon>
