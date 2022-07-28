@@ -167,26 +167,52 @@ public class LoginUserService : INotifyPropertyChanged {
     }
 
 
-    //Kjell
+    //Kjell-Adjusted by Andang Kloran to include password validation
     public string NewPasswordButton(string passwordInput, string passwordRepeatInput)
     {
         var Message = string.Empty;
 
-        //If password and repeat password are equal
-        //Then password can be saved in database
-        if (passwordInput == passwordRepeatInput)
+        //Password cannot be empty
+        if (passwordInput != null)
         {
-            //Calling DAOUser to save password and date in database
-            DAOUser.ChangePassword(passwordInput, _gebruiker);
+            //Password must be atleast 8 characters long, must contain an uppercase letter and a symbol
+            if (passwordInput.Length >= 8 && passwordInput.Any(char.IsUpper))
+            {
+                if (passwordInput.Any(char.IsSymbol) || passwordInput.IndexOfAny(new char[] { ',', '/', '\\', '.', '~', '@', '#', '%', '^', '*', '&' }) >= 0)
+                {
+                    //If password and repeat password are thesame
+                    //Then password can be saved in database
+                    if (passwordInput == passwordRepeatInput)
+                    {
+                        //Calling DAOUser to save password and date in database
+                        DAOUser.ChangePassword(passwordInput, _gebruiker);
+                    }
+                    //If password and repeat password are not thesame
+                    //Error message appears
+                    else if (passwordInput != passwordRepeatInput)
+                    {
+                        Message = "Wachtwoorden komen niet overeen!";
+                    }
+                }
+                else
+                {
+                    Message = "Wachtwoord moet minimaal 8 tekens lang zijn, moet een hoofdletter en een speciaal teken bevatten.";
+                }
+            }
+            else
+            {
+                Message = "Wachtwoord moet minimaal 8 tekens lang zijn, moet een hoofdletter en een speciaal teken bevatten.";
+            }
         }
-        //If password and repeat password are not equal
-        //Error message appears
-        else if(passwordInput != passwordRepeatInput)
+        else
         {
-            Message = "Wachtwoorden komen niet overeen!";
+            Message = "Voer een wachtwoord in alstublieft!";
         }
         return Message;
     }
+
+
+
 
     #endregion
 }

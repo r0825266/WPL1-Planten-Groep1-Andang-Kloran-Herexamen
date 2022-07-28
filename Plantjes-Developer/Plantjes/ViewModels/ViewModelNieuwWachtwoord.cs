@@ -40,11 +40,7 @@ namespace Plantjes.ViewModels
 
                     //Current window closing
                     Application.Current.Windows[0]?.Close();
-            }
-
-
-                
-            
+                }                   
         }
         #region MVVM TextFieldsBinding
 
@@ -128,7 +124,6 @@ namespace Plantjes.ViewModels
         }
 
         #endregion
-
     }
     //------------------------------------------------------------------------------------
 }

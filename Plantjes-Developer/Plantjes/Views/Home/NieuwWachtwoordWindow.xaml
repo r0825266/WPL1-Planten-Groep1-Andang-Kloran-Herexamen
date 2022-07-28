@@ -28,7 +28,7 @@
             </PasswordBox>
             <Button x:Name="btnBevestig" Content="Bevestigen" Margin="121,220,121,38" 
                     Style="{StaticResource ButtonUnified}" Command="{Binding changePasswordCommand}" Height="25" FontSize="15"/>
-            <Label x:Name="lblError" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="WhiteSmoke" Height="35" Width="340" FontWeight="Bold" HorizontalContentAlignment="Center" >
+            <Label x:Name="lblError" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="WhiteSmoke" Height="45" Width="340" FontWeight="Bold" HorizontalContentAlignment="Center" >
                 <Label.Content>
                     <AccessText TextWrapping="Wrap" Text="{Binding errorMessage}"/>
                 </Label.Content>
