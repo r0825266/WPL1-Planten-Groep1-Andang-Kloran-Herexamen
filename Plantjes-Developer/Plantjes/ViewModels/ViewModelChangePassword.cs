@@ -34,7 +34,7 @@ namespace Plantjes.ViewModels
                 if (errorMessage == null || errorMessage == string.Empty)
                 {
                     //Message box to confirm to user that the password has been successfully changed
-                    MessageBox.Show("Password sucessfully changed.");
+                    MessageBox.Show("Wachtwoord succesvol veranderd.");
 
                     //Opening main window again after changing password
                     MainWindow mainWindow = new MainWindow();
@@ -43,7 +43,6 @@ namespace Plantjes.ViewModels
                     //Current window closing
                     Application.Current.Windows[0]?.Close();
                 }
-  
         }
         public void AnnulerenButtonClick()
         {
