@@ -66,6 +66,7 @@ public partial class App : Application {
         services.AddTransient<ViewModelAddPlant>(); //----------------- Andang Kloran
         services.AddTransient<ViewModelFilter>();
         services.AddTransient<ViewModelChangePassword>();
+        services.AddTransient<ViewModelPlantToevoegen>();
         //xander - viewmodel factories
         var loginService = (LoginUserService)services.BuildServiceProvider().GetService(typeof(LoginUserService));
         var searchService = (SearchService)services.BuildServiceProvider().GetService(typeof(SearchService));
@@ -86,9 +87,10 @@ public partial class App : Application {
         services.AddSingleton(() => new ViewModelUserManagement());
         services.AddSingleton(() => new ViewModelPlantManagement());
         services.AddSingleton(() => new ViewModelNieuwWachtwoord(loginService));
-        services.AddSingleton(() => new ViewModelAddPlant());  //----------- Andang Kloran
+        services.AddSingleton(() => new ViewModelAddPlant(searchService, detailService));  //----------- Andang Kloran
         services.AddSingleton(() => new ViewModelFilter());
         services.AddSingleton(() => new ViewModelChangePassword(loginService));
+        services.AddSingleton(() => new ViewModelPlantToevoegen());
 
         return services.BuildServiceProvider();
     }

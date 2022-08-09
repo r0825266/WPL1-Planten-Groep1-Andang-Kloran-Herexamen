@@ -16,11 +16,12 @@ public class ViewModelRepo {
     private readonly ViewModelHabitat viewModelHabitat = (ViewModelHabitat)App.Current.Services.GetService(typeof(ViewModelHabitat));
     private readonly ViewModelUserManagement viewModelUserManagement = (ViewModelUserManagement)App.Current.Services.GetService(typeof(ViewModelUserManagement)); 
     private readonly ViewModelPlantManagement viewModelPlantManagement = (ViewModelPlantManagement)App.Current.Services.GetService(typeof(ViewModelPlantManagement));
+    private readonly ViewModelPlantToevoegen viewModelPlantToevoegen = (ViewModelPlantToevoegen)App.Current.Services.GetService(typeof(ViewModelPlantToevoegen));
 
 
     private readonly ViewModelNameResult viewModelNameResult = (ViewModelNameResult)App.Current.Services.GetService(typeof(ViewModelNameResult));
     private readonly ViewModelRegister viewModelRegister = (ViewModelRegister)App.Current.Services.GetService(typeof(ViewModelRegister));
-    //private readonly ViewModelAddPlant viewModelAddPlant = (ViewModelAddPlant)App.Current.Services.GetService(typeof(ViewModelAddPlant));
+    private readonly ViewModelAddPlant viewModelAddPlant = (ViewModelAddPlant)App.Current.Services.GetService(typeof(ViewModelAddPlant));
 
     public ViewModelRepo() {
         //hier een extra lijn code per user control
@@ -33,7 +34,8 @@ public class ViewModelRepo {
         _viewModels.Add("VIEWREGISTER", viewModelRegister);
         _viewModels.Add("VIEWUSERMANAGEMENT", viewModelUserManagement);
         _viewModels.Add("VIEWPLANTMANAGEMENT", viewModelPlantManagement);
-       // _viewModels.Add("VIEWADDPLANT", viewModelAddPlant);
+       _viewModels.Add("VIEWADDPLANT", viewModelAddPlant);
+        _viewModels.Add("VIEWPLANTTOEVOEGEN", viewModelPlantToevoegen);
     }
 
     public ViewModelBase GetViewModel(string modelName) {

@@ -113,7 +113,7 @@
                                         ItemsSource="{Binding cmbVariant}"
                                         DisplayMemberPath="Variantnaam"
                                         SelectedValuePath="VariantId"
-                                        SelectedItem="{Binding Path= SelectedVariant}" IsEditable="True"
+                                        SelectedItem="{Binding Path= SelectedVariant}" IsEditable="True" 
                       >
                                             <ComboBox.Effect>
                                                 <DropShadowEffect/>

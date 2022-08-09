@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:pages="clr-namespace:Plantjes.Views.UserControls"
         xmlns:mgmtpages="clr-namespace:Plantjes.Views.UserControls.Beheer"
+        xmlns:pages1="clr-namespace:Plantjes.Views.Home"
         xmlns:viewModels="clr-namespace:Plantjes.ViewModels"
         xmlns:plantjes="clr-namespace:Plantjes"
 
@@ -46,9 +47,13 @@
         <DataTemplate DataType="{x:Type viewModels:ViewModelAppearance}">
             <pages:UserControlAppearance />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ViewModelAddPlant}">
+            <pages:UserControlAddPlant/>
+        </DataTemplate>
     </Window.Resources>
 
-    <Viewbox MaxHeight="900" MaxWidth="1250">
+    <Viewbox MaxHeight="900" MaxWidth="1250" VerticalAlignment="Top">
         <Grid Opacity="0.9">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="46*" />
@@ -64,9 +69,9 @@
                         Command="{Binding mainNavigationCommand}"
                         CommandParameter="VIEWNAME" Click="btn_ClickHideImage" Height="60" Width="200" Style="{StaticResource ButtonUnified}" />
                 <Button x:Name="btnPlantToevoegen" Content="Plant toevoegen" Margin="0,0,5,0" Visibility="{Binding ShowEditPlants}"
-                        Command="{Binding AddPlantCommand}"
+                        Command="{Binding mainNavigationCommand}"
 
-                        CommandParameter="VIEWNAME" Click="btn_ClickHideImage" Height="60" Style="{StaticResource ButtonUnified}" />
+                        CommandParameter="VIEWADDPLANT" Click="btn_ClickHideImage" Height="60" Style="{StaticResource ButtonUnified}"/>
                 <ComboBox x:Name="cmbBeheer" Width="200" Height="60" Margin="4,2,0,0" Style="{StaticResource ComboBoxUnified}" Visibility="{Binding ShowUserManagement}">
 
                     <ComboBoxItem Focusable="False">
@@ -78,7 +83,7 @@
                         <Button Content="Plant" Name="btnBeheerPlant" Style="{StaticResource ButtonUnified}"
                                 Command="{Binding mainNavigationCommand}"
                                 CommandParameter="VIEWPLANTMANAGEMENT"
-                                Click="btn_ClickHideImage" />
+                                Click="btn_ClickHideImage"/>
                     </ComboBoxItem>
                 </ComboBox>
             </StackPanel>
@@ -90,7 +95,7 @@
             <!--<Frame x:Name="MainFrame" Margin="0,190,0,0"  Content=""/>-->
 
             <!-- hier doe je de binding van het currentViewModel !Clue van het systeem -->
-            <Grid x:Name="MainContent" HorizontalAlignment="Left" Width="1230" Margin="10,101,0,0" Height="773" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <Grid x:Name="MainContent" HorizontalAlignment="Left" Width="1230" Margin="10,90,0,0" Height="773" VerticalAlignment="Top" Grid.ColumnSpan="2">
                 <ContentControl Content="{Binding currentViewModel}" HorizontalAlignment="Left" Width="1210" Height="754" VerticalAlignment="Center" Margin="10,0,0,0" />
             </Grid>
             <Label x:Name="lblLogin" Content="{Binding loggedInMessage}" Grid.Column="1" Margin="0,14,140,0" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="40" Width="Auto" Foreground="Black" FontStretch="UltraExpanded" FontSize="19" />
