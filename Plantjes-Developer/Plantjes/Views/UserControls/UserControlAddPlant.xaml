@@ -1,14 +1,17 @@
-﻿<Window x:Class="Plantjes.Views.Home.AddPlantWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Plantjes.Views.Home"
-        mc:Ignorable="d"
-        Title="Add plant" Height="900" Width="1250" Background="#FFA0A0A0">
-    <!-- Written by Andang Kloran - Added to by Kjell-->
+﻿<UserControl x:Class="Plantjes.Views.UserControls.UserControlAddPlant"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plantjes.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1080">
+    
+    <!--Written by Andang Kloran, on code of kyell-->
     <Grid>
-        <Viewbox MaxHeight="900" MaxWidth="1250" Margin="0,0,-11,0">
+        <Canvas Background="#FFA0A0A0" Height="800" Width="1080" VerticalAlignment="Top">
+
+            <Viewbox MaxHeight="800" MaxWidth="1080" Margin="5,0,-11,0">
             <Grid Height="900" Width="1250">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="147*"/>
@@ -1970,5 +1973,8 @@
             </Grid>
 
         </Viewbox>
+
+        </Canvas>
+
     </Grid>
-</Window>
+</UserControl>

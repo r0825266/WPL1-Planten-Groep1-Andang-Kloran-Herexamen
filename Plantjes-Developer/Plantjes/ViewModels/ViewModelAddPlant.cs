@@ -1,10 +1,298 @@
 ﻿using Microsoft.Toolkit.Mvvm.Input;
+using Plantjes.ViewModels.Services;
 using Plantjes.Views.Home;
 using System.Windows;
+using System.Collections.ObjectModel;
+using System.Windows.Media;
+using Plantjes.Models.Db;
+using Plantjes.ViewModels.HelpClasses;
+using Plantjes.ViewModels.Services;
+using Plantjes.Views.Home;
+using Plantjes.Views.UserControls;
 
 namespace Plantjes.ViewModels {
     public class ViewModelAddPlant : ViewModelBase {
+
+        // Modified and added to by Andang Kloran
+
+        //private ServiceProvider _serviceProvider;
+        private readonly SearchService _searchService = (SearchService)App.Current.Services.GetService(typeof(SearchService));
+        private readonly DetailService _detailService = (DetailService)App.Current.Services.GetService(typeof(DetailService));
+
+        public ViewModelAddPlant(SearchService searchService, DetailService detailservice)
+        {
+            _searchService = searchService;
+            //_searchService = new SearchService();
+            _detailService = detailservice;
+
+            //Observable Collections 
+            ////Obserbable collections to fill with the necessary objects to show in the comboboxes
+            cmbTypes = new ObservableCollection<TfgsvType>();
+            cmbFamilies = new ObservableCollection<TfgsvFamilie>();
+            cmbGeslacht = new ObservableCollection<TfgsvGeslacht>();
+            cmbSoort = new ObservableCollection<TfgsvSoort>();
+            cmbVariant = new ObservableCollection<TfgsvVariant>();
+            cmbRatioBladBloei = new ObservableCollection<Fenotype>();
+
+            ////Observable Collections to bind to listboxes
+            filteredPlantResults = new ObservableCollection<Plant>();
+            detailsSelectedPlant = new ObservableCollection<string>();
+
+            //ICommands
+            ////These will be used to bind our buttons in the xaml and to give them functionality
+            cancelCommand = new RelayCommand(cancelButton);
+
+            //These comboboxes will already be filled with data on startup
+            fillComboboxes();
+
+            _viewModelRepo2 = (ViewModelRepo2)App.Current.Services.GetService(typeof(ViewModelRepo2));
+            mainNavigationCommand = new MyICommand<string>(_onNavigationChanged);
+        }
+
+
+        #region viewmodel things
+        public MyICommand<string> mainNavigationCommand { get; set; }
+        private ViewModelBase _currentViewModel;
+
+        private readonly ViewModelRepo2 _viewModelRepo2;
+        private void _onNavigationChanged(string userControlName)
+        {
+            currentViewModel = _viewModelRepo2.GetViewModel(userControlName);
+        }
+
+        public ViewModelBase currentViewModel
+        {
+            get => _currentViewModel;
+            set => SetProperty(ref _currentViewModel, value);
+        }
+
+        #endregion
+        //Observable collections
+        ////Bind to comboboxes
+        public ObservableCollection<TfgsvType> cmbTypes { get; set; }
+        public ObservableCollection<TfgsvFamilie> cmbFamilies { get; set; }
+        public ObservableCollection<TfgsvGeslacht> cmbGeslacht { get; set; }
+        public ObservableCollection<TfgsvSoort> cmbSoort { get; set; }
+        public ObservableCollection<TfgsvVariant> cmbVariant { get; set; }
+        public ObservableCollection<Fenotype> cmbRatioBladBloei { get; set; }
+
+        ////Bind to ListBoxes
+        public ObservableCollection<Plant> filteredPlantResults { get; set; }
+
+        public ObservableCollection<string> detailsSelectedPlant { get; set; }
+
+        //geschreven door owen
+        public void FillAllImages()
+        {
+            ImageBlad = _searchService.GetImageLocation("blad", SelectedPlantInResult);
+            ImageBloei = _searchService.GetImageLocation("bloei", SelectedPlantInResult);
+            ImageHabitus = _searchService.GetImageLocation("habitus", SelectedPlantInResult);
+        }
+
+        //written by kenny (region)
+
+        #region tussenFunctie voor knoppen met parameters
+
+        public void fillComboboxes()
+        {
+            _searchService.fillComboBoxType(cmbTypes);
+            _searchService.fillComboBoxFamilie(SelectedType, cmbFamilies);
+            _searchService.fillComboBoxGeslacht(SelectedFamilie, cmbGeslacht);
+            _searchService.fillComboBoxSoort(SelectedGeslacht, cmbSoort);
+            _searchService.fillComboBoxVariant(cmbVariant);
+            _searchService.fillComboBoxRatioBloeiBlad(cmbRatioBladBloei);
+        }
+
+        #endregion
+
+
+        #region RelayCommands
+
+        //RelayCommands
         private RelayCommand _cancelCommand;
+        
+        #endregion
+
+        //geschreven door owen en robin
+
+        #region Selected Item variables for each combobox
+
+        private TfgsvType _selectedType;
+
+        public TfgsvType SelectedType
+        {
+            get => _selectedType; 
+            set
+            {
+                _selectedType = value;
+
+                cmbFamilies.Clear();
+                cmbGeslacht.Clear();
+                cmbSoort.Clear();
+                cmbVariant.Clear();
+
+                _searchService.fillComboBoxFamilie(SelectedType, cmbFamilies);
+                OnPropertyChanged();
+            }
+        }
+
+        private TfgsvFamilie _selectedFamilie;
+
+        public TfgsvFamilie SelectedFamilie
+        {
+            get => _selectedFamilie;
+            set
+            {
+                _selectedFamilie = value;
+
+
+                cmbGeslacht.Clear();
+                cmbSoort.Clear();
+                cmbVariant.Clear();
+
+                _searchService.fillComboBoxGeslacht(SelectedFamilie, cmbGeslacht);
+                OnPropertyChanged();
+            }
+        }
+
+        private TfgsvGeslacht _selectedGeslacht;
+
+        public TfgsvGeslacht SelectedGeslacht
+        {
+            get => _selectedGeslacht;
+            set
+            {
+                _selectedGeslacht = value;
+
+
+                cmbSoort.Clear();
+                cmbVariant.Clear();
+
+                _searchService.fillComboBoxSoort(SelectedGeslacht, cmbSoort);
+                OnPropertyChanged();
+            }
+        }
+
+        private TfgsvSoort _selectedSoort;
+
+        public TfgsvSoort SelectedSoort
+        {
+            get => _selectedSoort;
+            set
+            {
+                _selectedSoort = value;
+
+                cmbVariant.Clear();
+
+                OnPropertyChanged();
+            }
+        }
+
+        private TfgsvVariant _selectedVariant;
+
+        public TfgsvVariant SelectedVariant
+        {
+            get => _selectedVariant;
+            set
+            {
+                _selectedVariant = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _selectedRatioBloeiBlad;
+
+        public string SelectedRatioBloeiBlad
+        {
+            get => _selectedRatioBloeiBlad;
+            set
+            {
+                _selectedRatioBloeiBlad = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _selectedNederlandseNaam;
+
+        public string SelectedNederlandseNaam
+        {
+            get => _selectedNederlandseNaam;
+            set
+            {
+                if (SelectedNederlandseNaam == "")
+                    _selectedNederlandseNaam = null;
+                else
+                    _selectedNederlandseNaam = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        //This will update the selected plant in the result listbox
+        //This will be used to show the selected plant details
+        private Plant _selectedPlantInResult;
+
+        public Plant SelectedPlantInResult
+        {
+            get => _selectedPlantInResult;
+            set
+            {
+                _selectedPlantInResult = value;
+                FillAllImages();
+                OnPropertyChanged();
+                _searchService.FillDetailPlantResult(detailsSelectedPlant, SelectedPlantInResult);
+                _detailService.SelectedPlant = SelectedPlantInResult;
+
+                //Make the currently selected plant in the Result list available in the SearchService
+            }
+        }
+
+        #endregion
+
+        #region binding images
+
+        private ImageSource _imageBloei;
+
+        public ImageSource ImageBloei
+        {
+            get => _imageBloei;
+            set
+            {
+                _imageBloei = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ImageSource _imageHabitus;
+
+        public ImageSource ImageHabitus
+        {
+            get => _imageHabitus;
+            set
+            {
+                _imageHabitus = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ImageSource _imageBlad;
+
+        public ImageSource ImageBlad
+        {
+            get => _imageBlad;
+            set
+            {
+                _imageBlad = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+
+       // private RelayCommand _cancelCommand;
+
+        //Defining variables for checkboxes
         private bool _selectCheckBoxSpruitWintergroen;
         private bool _selectedCheckBox1;
         private bool _selectedCheckBox2;
@@ -222,1691 +510,2127 @@ namespace Plantjes.ViewModels {
         private bool _selectedCheckBoxVoedingsbehoefteVoedselrijkIndifferent;
         private bool _selectedCheckBoxVorstgevoelig;
 
-        // Written by Andang -- Changed by Kjell
-        public ViewModelAddPlant() {
-            cancelCommand = new RelayCommand(cancelButton);
-        }
+        //Defining variables for Textboxes
+        private string _typeInput;
+        private string _familieInput;
+        private string _geslachtInput;
+        private string _naamInput;
+        public string _soortInput;
+        public string _variantInput;
+        public string _ratioBladBloeiInput;
+        public string _opmerkingInput;
+        public string _frequenciePerJaarInput;
+
+        private string _errorMessage;
 
 
-        public RelayCommand cancelCommand {
+
+
+
+        //public ViewModelAddPlant() {
+        //    cancelCommand = new RelayCommand(cancelButton);
+        //}
+
+        public RelayCommand cancelCommand
+        {
             get => _cancelCommand;
             set => _cancelCommand = value;
         }
 
-        public void cancelButton() {
+        //Annuleren button closes the current window and reopens the main window
+        public void cancelButton()
+        {
             var mainWindow = new MainWindow();
             mainWindow.Show();
             Application.Current.Windows[0]?.Close();
         }
 
-        //bindings
-        public bool SelectCheckBoxSpruitWintergroen {
+        //Bindings CheckBoxes
+        public bool SelectCheckBoxSpruitWintergroen
+        {
             get => _selectCheckBoxSpruitWintergroen;
-            set {
+            set
+            {
                 _selectCheckBoxSpruitWintergroen = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBox1 {
+        public bool SelectedCheckBox1
+        {
             get => _selectedCheckBox1;
-            set {
+            set
+            {
                 _selectedCheckBox1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBox2 {
+        public bool SelectedCheckBox2
+        {
             get => _selectedCheckBox2;
-            set {
+            set
+            {
                 _selectedCheckBox2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBox3 {
+        public bool SelectedCheckBox3
+        {
             get => _selectedCheckBox3;
-            set {
+            set
+            {
                 _selectedCheckBox3 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBox4 {
+        public bool SelectedCheckBox4
+        {
             get => _selectedCheckBox4;
-            set {
+            set
+            {
                 _selectedCheckBox4 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBox5 {
+        public bool SelectedCheckBox5
+        {
             get => _selectedCheckBox5;
-            set {
+            set
+            {
                 _selectedCheckBox5 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBox6 {
+        public bool SelectedCheckBox6
+        {
             get => _selectedCheckBox6;
-            set {
+            set
+            {
                 _selectedCheckBox6 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBox7 {
+        public bool SelectedCheckBox7
+        {
             get => _selectedCheckBox7;
-            set {
+            set
+            {
                 _selectedCheckBox7 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBox8 {
+        public bool SelectedCheckBox8
+        {
             get => _selectedCheckBox8;
-            set {
+            set
+            {
                 _selectedCheckBox8 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBox9 {
+        public bool SelectedCheckBox9
+        {
             get => _selectedCheckBox9;
-            set {
+            set
+            {
                 _selectedCheckBox9 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxAntagonischGeenInvloed {
+        public bool SelectedCheckBoxAntagonischGeenInvloed
+        {
             get => _selectedCheckBoxAntagonischGeenInvloed;
-            set {
+            set
+            {
                 _selectedCheckBoxAntagonischGeenInvloed = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxAntagonischGereduceerd {
+        public bool SelectedCheckBoxAntagonischGereduceerd
+        {
             get => _selectedCheckBoxAntagonischGereduceerd;
-            set {
+            set
+            {
                 _selectedCheckBoxAntagonischGereduceerd = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxAntagonischGroei {
+        public bool SelectedCheckBoxAntagonischGroei
+        {
             get => _selectedCheckBoxAntagonischGroei;
-            set {
+            set
+            {
                 _selectedCheckBoxAntagonischGroei = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxAntagonischOnbekend {
+        public bool SelectedCheckBoxAntagonischOnbekend
+        {
             get => _selectedCheckBoxAntagonischOnbekend;
-            set {
+            set
+            {
                 _selectedCheckBoxAntagonischOnbekend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxAntagonischTerugDringen {
+        public bool SelectedCheckBoxAntagonischTerugDringen
+        {
             get => _selectedCheckBoxAntagonischTerugDringen;
-            set {
+            set
+            {
                 _selectedCheckBoxAntagonischTerugDringen = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxApr {
+        public bool SelectedCheckBoxApr
+        {
             get => _selectedCheckBoxApr;
-            set {
+            set
+            {
                 _selectedCheckBoxApr = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxAug {
+        public bool SelectedCheckBoxAug
+        {
             get => _selectedCheckBoxAug;
-            set {
+            set
+            {
                 _selectedCheckBoxAug = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBezonningHS {
+        public bool SelectedCheckBoxBezonningHS
+        {
             get => _selectedCheckBoxBezonningHs1;
-            set {
+            set
+            {
                 _selectedCheckBoxBezonningHs1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBezonningHSS {
+        public bool SelectedCheckBoxBezonningHSS
+        {
             get => _selectedCheckBoxBezonningHss;
-            set {
+            set
+            {
                 _selectedCheckBoxBezonningHss = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBezonningOnbekend {
+        public bool SelectedCheckBoxBezonningOnbekend
+        {
             get => _selectedCheckBoxBezonningOnbekend;
-            set {
+            set
+            {
                 _selectedCheckBoxBezonningOnbekend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBezonningS {
+        public bool SelectedCheckBoxBezonningS
+        {
             get => _selectedCheckBoxBezonningS;
-            set {
+            set
+            {
                 _selectedCheckBoxBezonningS = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBezonningZ {
+        public bool SelectedCheckBoxBezonningZ
+        {
             get => _selectedCheckBoxBezonningZ1;
-            set {
+            set
+            {
                 _selectedCheckBoxBezonningZ1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBezonningZHS {
+        public bool SelectedCheckBoxBezonningZHS
+        {
             get => _selectedCheckBoxBezonningZhs1;
-            set {
+            set
+            {
                 _selectedCheckBoxBezonningZhs1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBezonningZHSS {
+        public bool SelectedCheckBoxBezonningZHSS
+        {
             get => _selectedCheckBoxBezonningZhss;
-            set {
+            set
+            {
                 _selectedCheckBoxBezonningZhss = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBezonningZS {
+        public bool SelectedCheckBoxBezonningZS
+        {
             get => _selectedCheckBoxBezonningZs;
-            set {
+            set
+            {
                 _selectedCheckBoxBezonningZs = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBijvriendelijk {
+        public bool SelectedCheckBoxBijvriendelijk
+        {
             get => _selectedCheckBoxBijvriendelijk;
-            set {
+            set
+            {
                 _selectedCheckBoxBijvriendelijk = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurBlauw {
+        public bool SelectedCheckBoxBladkleurBlauw
+        {
             get => _selectedCheckBoxBladkleurBlauw;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurBlauw = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurBruin {
+        public bool SelectedCheckBoxBladkleurBruin
+        {
             get => _selectedCheckBoxBladkleurBruin;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurBruin = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurGeel {
+        public bool SelectedCheckBoxBladkleurGeel
+        {
             get => _selectedCheckBoxBladkleurGeel;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurGeel = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurGrijs {
+        public bool SelectedCheckBoxBladkleurGrijs
+        {
             get => _selectedCheckBoxBladkleurGrijs;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurGrijs = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurGroen {
+        public bool SelectedCheckBoxBladkleurGroen
+        {
             get => _selectedCheckBoxBladkleurGroen;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurGroen = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurLila {
+        public bool SelectedCheckBoxBladkleurLila
+        {
             get => _selectedCheckBoxBladkleurLila;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurLila = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurOnbekend {
+        public bool SelectedCheckBoxBladkleurOnbekend
+        {
             get => _selectedCheckBoxBladkleurOnbekend2;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurOnbekend2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurOranje {
+        public bool SelectedCheckBoxBladkleurOranje
+        {
             get => _selectedCheckBoxBladkleurOranje;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurOranje = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurPaars {
+        public bool SelectedCheckBoxBladkleurPaars
+        {
             get => _selectedCheckBoxBladkleurPaars1;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurPaars1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurRood {
+        public bool SelectedCheckBoxBladkleurRood
+        {
             get => _selectedCheckBoxBladkleurRood;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurRood = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurRosé {
+        public bool SelectedCheckBoxBladkleurRosé
+        {
             get => _selectedCheckBoxBladkleurRosé;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurRosé = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurWit {
+        public bool SelectedCheckBoxBladkleurWit
+        {
             get => _selectedCheckBoxBladkleurWit;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurWit = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladkleurZwart {
+        public bool SelectedCheckBoxBladkleurZwart
+        {
             get => _selectedCheckBoxBladkleurZwart;
-            set {
+            set
+            {
                 _selectedCheckBoxBladkleurZwart = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladvormenVorm1 {
+        public bool SelectedCheckBoxBladvormenVorm1
+        {
             get => _selectedCheckBoxBladvormenVorm1;
-            set {
+            set
+            {
                 _selectedCheckBoxBladvormenVorm1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladvormenVorm2 {
+        public bool SelectedCheckBoxBladvormenVorm2
+        {
             get => _selectedCheckBoxBladvormenVorm2;
-            set {
+            set
+            {
                 _selectedCheckBoxBladvormenVorm2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladvormenVorm3 {
+        public bool SelectedCheckBoxBladvormenVorm3
+        {
             get => _selectedCheckBoxBladvormenVorm3;
-            set {
+            set
+            {
                 _selectedCheckBoxBladvormenVorm3 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladvormenVorm4 {
+        public bool SelectedCheckBoxBladvormenVorm4
+        {
             get => _selectedCheckBoxBladvormenVorm4;
-            set {
+            set
+            {
                 _selectedCheckBoxBladvormenVorm4 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladvormenVorm5 {
+        public bool SelectedCheckBoxBladvormenVorm5
+        {
             get => _selectedCheckBoxBladvormenVorm5;
-            set {
+            set
+            {
                 _selectedCheckBoxBladvormenVorm5 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladvormenVorm6 {
+        public bool SelectedCheckBoxBladvormenVorm6
+        {
             get => _selectedCheckBoxBladvormenVorm6;
-            set {
+            set
+            {
                 _selectedCheckBoxBladvormenVorm6 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladvormenVorm7 {
+        public bool SelectedCheckBoxBladvormenVorm7
+        {
             get => _selectedCheckBoxBladvormenVorm7;
-            set {
+            set
+            {
                 _selectedCheckBoxBladvormenVorm7 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladvormenVorm8 {
+        public bool SelectedCheckBoxBladvormenVorm8
+        {
             get => _selectedCheckBoxBladvormenVorm8;
-            set {
+            set
+            {
                 _selectedCheckBoxBladvormenVorm8 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBladvormenVorm9 {
+        public bool SelectedCheckBoxBladvormenVorm9
+        {
             get => _selectedCheckBoxBladvormenVorm9;
-            set {
+            set
+            {
                 _selectedCheckBoxBladvormenVorm9 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteApr {
+        public bool SelectedCheckBoxBloeiHoogteApr
+        {
             get => _selectedCheckBoxBloeiHoogteApr;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteApr = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteAug {
+        public bool SelectedCheckBoxBloeiHoogteAug
+        {
             get => _selectedCheckBoxBloeiHoogteAug;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteAug = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteDec {
+        public bool SelectedCheckBoxBloeiHoogteDec
+        {
             get => _selectedCheckBoxBloeiHoogteDec;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteDec = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteFeb {
+        public bool SelectedCheckBoxBloeiHoogteFeb
+        {
             get => _selectedCheckBoxBloeiHoogteFeb;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteFeb = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteJan {
+        public bool SelectedCheckBoxBloeiHoogteJan
+        {
             get => _selectedCheckBoxBloeiHoogteJan;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteJan = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteJul {
+        public bool SelectedCheckBoxBloeiHoogteJul
+        {
             get => _selectedCheckBoxBloeiHoogteJul;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteJul = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteJun {
+        public bool SelectedCheckBoxBloeiHoogteJun
+        {
             get => _selectedCheckBoxBloeiHoogteJun;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteJun = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteMar {
+        public bool SelectedCheckBoxBloeiHoogteMar
+        {
             get => _selectedCheckBoxBloeiHoogteMar;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteMar = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteMay {
+        public bool SelectedCheckBoxBloeiHoogteMay
+        {
             get => _selectedCheckBoxBloeiHoogteMay;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteMay = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteNov {
+        public bool SelectedCheckBoxBloeiHoogteNov
+        {
             get => _selectedCheckBoxBloeiHoogteNov;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteNov = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteOct {
+        public bool SelectedCheckBoxBloeiHoogteOct
+        {
             get => _selectedCheckBoxBloeiHoogteOct;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteOct = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteOnbekend {
+        public bool SelectedCheckBoxBloeiHoogteOnbekend
+        {
             get => _selectedCheckBoxBloeiHoogteOnbekend;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteOnbekend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiHoogteSep {
+        public bool SelectedCheckBoxBloeiHoogteSep
+        {
             get => _selectedCheckBoxBloeiHoogteSep;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiHoogteSep = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurBlauw {
+        public bool SelectedCheckBoxBloeikleurBlauw
+        {
             get => _selectedCheckBoxBloeikleurBlauw;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurBlauw = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurBruin {
+        public bool SelectedCheckBoxBloeikleurBruin
+        {
             get => _selectedCheckBoxBloeikleurBruin;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurBruin = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurGeel {
+        public bool SelectedCheckBoxBloeikleurGeel
+        {
             get => _selectedCheckBoxBloeikleurGeel;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurGeel = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurGrijs {
+        public bool SelectedCheckBoxBloeikleurGrijs
+        {
             get => _selectedCheckBoxBloeikleurGrijs;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurGrijs = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurGroen {
+        public bool SelectedCheckBoxBloeikleurGroen
+        {
             get => _selectedCheckBoxBloeikleurGroen;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurGroen = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurLila {
+        public bool SelectedCheckBoxBloeikleurLila
+        {
             get => _selectedCheckBoxBloeikleurLila;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurLila = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurOnbekend {
+        public bool SelectedCheckBoxBloeikleurOnbekend
+        {
             get => _selectedCheckBoxBloeikleurOnbekend;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurOnbekend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurOranje {
+        public bool SelectedCheckBoxBloeikleurOranje
+        {
             get => _selectedCheckBoxBloeikleurOranje;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurOranje = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurPaars {
+        public bool SelectedCheckBoxBloeikleurPaars
+        {
             get => _selectedCheckBoxBloeikleurPaars;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurPaars = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurRood {
+        public bool SelectedCheckBoxBloeikleurRood
+        {
             get => _selectedCheckBoxBloeikleurRood;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurRood = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurRosé {
+        public bool SelectedCheckBoxBloeikleurRosé
+        {
             get => _selectedCheckBoxBloeikleurRosé;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurRosé = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurViolet {
+        public bool SelectedCheckBoxBloeikleurViolet
+        {
             get => _selectedCheckBoxBloeikleurViolet;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurViolet = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurWit {
+        public bool SelectedCheckBoxBloeikleurWit
+        {
             get => _selectedCheckBoxBloeikleurWit;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurWit = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeikleurZwart {
+        public bool SelectedCheckBoxBloeikleurZwart
+        {
             get => _selectedCheckBoxBloeikleurZwart;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeikleurZwart = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInApr {
+        public bool SelectedCheckBoxBloeitInApr
+        {
             get => _selectedCheckBoxBloeitInApr;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInApr = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInAug {
+        public bool SelectedCheckBoxBloeitInAug
+        {
             get => _selectedCheckBoxBloeitInAug;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInAug = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInDec {
+        public bool SelectedCheckBoxBloeitInDec
+        {
             get => _selectedCheckBoxBloeitInDec;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInDec = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInFeb {
+        public bool SelectedCheckBoxBloeitInFeb
+        {
             get => _selectedCheckBoxBloeitInFeb;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInFeb = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInJan {
+        public bool SelectedCheckBoxBloeitInJan
+        {
             get => _selectedCheckBoxBloeitInJan;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInJan = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInJul {
+        public bool SelectedCheckBoxBloeitInJul
+        {
             get => _selectedCheckBoxBloeitInJul;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInJul = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInJun {
+        public bool SelectedCheckBoxBloeitInJun
+        {
             get => _selectedCheckBoxBloeitInJun;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInJun = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInMar {
+        public bool SelectedCheckBoxBloeitInMar
+        {
             get => _selectedCheckBoxBloeitInMar;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInMar = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInMay {
+        public bool SelectedCheckBoxBloeitInMay
+        {
             get => _selectedCheckBoxBloeitInMay;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInMay = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInNov {
+        public bool SelectedCheckBoxBloeitInNov
+        {
             get => _selectedCheckBoxBloeitInNov;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInNov = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInOct {
+        public bool SelectedCheckBoxBloeitInOct
+        {
             get => _selectedCheckBoxBloeitInOct;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInOct = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInOnbekend {
+        public bool SelectedCheckBoxBloeitInOnbekend
+        {
             get => _selectedCheckBoxBloeitInOnbekend;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInOnbekend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeitInSep {
+        public bool SelectedCheckBoxBloeitInSep
+        {
             get => _selectedCheckBoxBloeitInSep;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeitInSep = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiwijzeVorm1 {
+        public bool SelectedCheckBoxBloeiwijzeVorm1
+        {
             get => _selectedCheckBoxBloeiwijzeVorm1;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiwijzeVorm1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiwijzeVorm2 {
+        public bool SelectedCheckBoxBloeiwijzeVorm2
+        {
             get => _selectedCheckBoxBloeiwijzeVorm2;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiwijzeVorm2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiwijzeVorm3 {
+        public bool SelectedCheckBoxBloeiwijzeVorm3
+        {
             get => _selectedCheckBoxBloeiwijzeVorm3;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiwijzeVorm3 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiwijzeVorm4 {
+        public bool SelectedCheckBoxBloeiwijzeVorm4
+        {
             get => _selectedCheckBoxBloeiwijzeVorm4;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiwijzeVorm4 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiwijzeVorm5 {
+        public bool SelectedCheckBoxBloeiwijzeVorm5
+        {
             get => _selectedCheckBoxBloeiwijzeVorm5;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiwijzeVorm5 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiwijzeVorm6 {
+        public bool SelectedCheckBoxBloeiwijzeVorm6
+        {
             get => _selectedCheckBoxBloeiwijzeVorm6;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiwijzeVorm6 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxBloeiwijzeVormOnbekend {
+        public bool SelectedCheckBoxBloeiwijzeVormOnbekend
+        {
             get => _selectedCheckBoxBloeiwijzeVormOnbekend;
-            set {
+            set
+            {
                 _selectedCheckBoxBloeiwijzeVormOnbekend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxDec {
+        public bool SelectedCheckBoxDec
+        {
             get => _selectedCheckBoxDec;
-            set {
+            set
+            {
                 _selectedCheckBoxDec = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxEetbaarKruidbaar {
+        public bool SelectedCheckBoxEetbaarKruidbaar
+        {
             get => _selectedCheckBoxEetbaarKruidbaar;
-            set {
+            set
+            {
                 _selectedCheckBoxEetbaarKruidbaar = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxFeb {
+        public bool SelectedCheckBoxFeb
+        {
             get => _selectedCheckBoxFeb;
-            set {
+            set
+            {
                 _selectedCheckBoxFeb = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGeurend {
+        public bool SelectedCheckBoxGeurend
+        {
             get => _selectedCheckBoxGeurend;
-            set {
+            set
+            {
                 _selectedCheckBoxGeurend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrondSoortK {
+        public bool SelectedCheckBoxGrondSoortK
+        {
             get => _selectedCheckBoxGrondSoortK;
-            set {
+            set
+            {
                 _selectedCheckBoxGrondSoortK = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrondSoortL {
+        public bool SelectedCheckBoxGrondSoortL
+        {
             get => _selectedCheckBoxGrondSoortL;
-            set {
+            set
+            {
                 _selectedCheckBoxGrondSoortL = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrondSoortLK {
+        public bool SelectedCheckBoxGrondSoortLK
+        {
             get => _selectedCheckBoxGrondSoortLk;
-            set {
+            set
+            {
                 _selectedCheckBoxGrondSoortLk = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrondSoortOnbekend {
+        public bool SelectedCheckBoxGrondSoortOnbekend
+        {
             get => _selectedCheckBoxGrondSoortOnbekend;
-            set {
+            set
+            {
                 _selectedCheckBoxGrondSoortOnbekend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrondSoortZ {
+        public bool SelectedCheckBoxGrondSoortZ
+        {
             get => _selectedCheckBoxGrondSoortZ;
-            set {
+            set
+            {
                 _selectedCheckBoxGrondSoortZ = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrondSoortZL {
+        public bool SelectedCheckBoxGrondSoortZL
+        {
             get => _selectedCheckBoxGrondSoortZl;
-            set {
+            set
+            {
                 _selectedCheckBoxGrondSoortZl = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrondSoortZLK {
+        public bool SelectedCheckBoxGrondSoortZLK
+        {
             get => _selectedCheckBoxGrondSoortZlk;
-            set {
+            set
+            {
                 _selectedCheckBoxGrondSoortZlk = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrootte100 {
+        public bool SelectedCheckBoxGrootte100
+        {
             get => _selectedCheckBoxGrootte100;
-            set {
+            set
+            {
                 _selectedCheckBoxGrootte100 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrootte10 {
+        public bool SelectedCheckBoxGrootte10
+        {
             get => _selectedCheckBoxGrootte10;
-            set {
+            set
+            {
                 _selectedCheckBoxGrootte10 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrootte150 {
+        public bool SelectedCheckBoxGrootte150
+        {
             get => _selectedCheckBoxGrootte150;
-            set {
+            set
+            {
                 _selectedCheckBoxGrootte150 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrootte20 {
+        public bool SelectedCheckBoxGrootte20
+        {
             get => _selectedCheckBoxGrootte20;
-            set {
+            set
+            {
                 _selectedCheckBoxGrootte20 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrootte50 {
+        public bool SelectedCheckBoxGrootte50
+        {
             get => _selectedCheckBoxGrootte50;
-            set {
+            set
+            {
                 _selectedCheckBoxGrootte50 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrootte5 {
+        public bool SelectedCheckBoxGrootte5
+        {
             get => _selectedCheckBoxGrootte5;
-            set {
+            set
+            {
                 _selectedCheckBoxGrootte5 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxGrootteOnbekend {
+        public bool SelectedCheckBoxGrootteOnbekend
+        {
             get => _selectedCheckBoxGrootteOnbekend1;
-            set {
+            set
+            {
                 _selectedCheckBoxGrootteOnbekend1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatA1 {
+        public bool SelectedCheckBoxHabitatA1
+        {
             get => _selectedCheckBoxHabitatA1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatA1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatA2 {
+        public bool SelectedCheckBoxHabitatA2
+        {
             get => _selectedCheckBoxHabitatA2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatA2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatB1 {
+        public bool SelectedCheckBoxHabitatB1
+        {
             get => _selectedCheckBoxHabitatB1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatB1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatB2 {
+        public bool SelectedCheckBoxHabitatB2
+        {
             get => _selectedCheckBoxHabitatB2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatB2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatB3 {
+        public bool SelectedCheckBoxHabitatB3
+        {
             get => _selectedCheckBoxHabitatB3;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatB3 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatBR1 {
+        public bool SelectedCheckBoxHabitatBR1
+        {
             get => _selectedCheckBoxHabitatBr1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatBr1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatBR2 {
+        public bool SelectedCheckBoxHabitatBR2
+        {
             get => _selectedCheckBoxHabitatBr2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatBr2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatBR3 {
+        public bool SelectedCheckBoxHabitatBR3
+        {
             get => _selectedCheckBoxHabitatBr3;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatBr3 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatGB1 {
+        public bool SelectedCheckBoxHabitatGB1
+        {
             get => _selectedCheckBoxHabitatGb1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatGb1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatGB2 {
+        public bool SelectedCheckBoxHabitatGB2
+        {
             get => _selectedCheckBoxHabitatGb2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatGb2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatGB3 {
+        public bool SelectedCheckBoxHabitatGB3
+        {
             get => _selectedCheckBoxHabitatGb3;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatGb3 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatGR1 {
+        public bool SelectedCheckBoxHabitatGR1
+        {
             get => _selectedCheckBoxHabitatGr1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatGr1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatGR2 {
+        public bool SelectedCheckBoxHabitatGR2
+        {
             get => _selectedCheckBoxHabitatGr2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatGr2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatH1 {
+        public bool SelectedCheckBoxHabitatH1
+        {
             get => _selectedCheckBoxHabitatH1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatH1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatH2 {
+        public bool SelectedCheckBoxHabitatH2
+        {
             get => _selectedCheckBoxHabitatH2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatH2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatM1 {
+        public bool SelectedCheckBoxHabitatM1
+        {
             get => _selectedCheckBoxHabitatM1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatM1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatM2 {
+        public bool SelectedCheckBoxHabitatM2
+        {
             get => _selectedCheckBoxHabitatM2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatM2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatO4 {
+        public bool SelectedCheckBoxHabitatO4
+        {
             get => _selectedCheckBoxHabitatO4;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatO4 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatO5 {
+        public bool SelectedCheckBoxHabitatO5
+        {
             get => _selectedCheckBoxHabitatO5;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatO5 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatOB1 {
+        public bool SelectedCheckBoxHabitatOB1
+        {
             get => _selectedCheckBoxHabitatOb1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatOb1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatOB2 {
+        public bool SelectedCheckBoxHabitatOB2
+        {
             get => _selectedCheckBoxHabitatOb2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatOb2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatOnbekend {
+        public bool SelectedCheckBoxHabitatOnbekend
+        {
             get => _selectedCheckBoxHabitatOnbekend;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatOnbekend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatOP1B {
+        public bool SelectedCheckBoxHabitatOP1B
+        {
             get => _selectedCheckBoxHabitatOp1B;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatOp1B = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatOP1 {
+        public bool SelectedCheckBoxHabitatOP1
+        {
             get => _selectedCheckBoxHabitatOp1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatOp1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatOP2B {
+        public bool SelectedCheckBoxHabitatOP2B
+        {
             get => _selectedCheckBoxHabitatOp2B;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatOp2B = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatOP2 {
+        public bool SelectedCheckBoxHabitatOP2
+        {
             get => _selectedCheckBoxHabitatOp2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatOp2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatOP3B {
+        public bool SelectedCheckBoxHabitatOP3B
+        {
             get => _selectedCheckBoxHabitatOp3B;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatOp3B = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatOP3 {
+        public bool SelectedCheckBoxHabitatOP3
+        {
             get => _selectedCheckBoxHabitatOp3;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatOp3 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatSH1 {
+        public bool SelectedCheckBoxHabitatSH1
+        {
             get => _selectedCheckBoxHabitatSh1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatSh1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatSH2 {
+        public bool SelectedCheckBoxHabitatSH2
+        {
             get => _selectedCheckBoxHabitatSh2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatSh2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatST1 {
+        public bool SelectedCheckBoxHabitatST1
+        {
             get => _selectedCheckBoxHabitatSt1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatSt1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatST2 {
+        public bool SelectedCheckBoxHabitatST2
+        {
             get => _selectedCheckBoxHabitatSt2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatSt2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatSV1 {
+        public bool SelectedCheckBoxHabitatSV1
+        {
             get => _selectedCheckBoxHabitatSv1;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatSv1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatSV2 {
+        public bool SelectedCheckBoxHabitatSV2
+        {
             get => _selectedCheckBoxHabitatSv2;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatSv2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxHabitatSV3 {
+        public bool SelectedCheckBoxHabitatSV3
+        {
             get => _selectedCheckBoxHabitatSv3;
-            set {
+            set
+            {
                 _selectedCheckBoxHabitatSv3 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxJan {
+        public bool SelectedCheckBoxJan
+        {
             get => _selectedCheckBoxJan;
-            set {
+            set
+            {
                 _selectedCheckBoxJan = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxJul {
+        public bool SelectedCheckBoxJul
+        {
             get => _selectedCheckBoxJul;
-            set {
+            set
+            {
                 _selectedCheckBoxJul = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxJun {
+        public bool SelectedCheckBoxJun
+        {
             get => _selectedCheckBoxJun;
-            set {
+            set
+            {
                 _selectedCheckBoxJun = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxLevensvormenVorm1 {
+        public bool SelectedCheckBoxLevensvormenVorm1
+        {
             get => _selectedCheckBoxLevensvormenVorm1;
-            set {
+            set
+            {
                 _selectedCheckBoxLevensvormenVorm1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxLevensvormenVorm2 {
+        public bool SelectedCheckBoxLevensvormenVorm2
+        {
             get => _selectedCheckBoxLevensvormenVorm2;
-            set {
+            set
+            {
                 _selectedCheckBoxLevensvormenVorm2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxLevensvormenVorm3 {
+        public bool SelectedCheckBoxLevensvormenVorm3
+        {
             get => _selectedCheckBoxLevensvormenVorm3;
-            set {
+            set
+            {
                 _selectedCheckBoxLevensvormenVorm3 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxLevensvormenVorm4 {
+        public bool SelectedCheckBoxLevensvormenVorm4
+        {
             get => _selectedCheckBoxLevensvormenVorm4;
-            set {
+            set
+            {
                 _selectedCheckBoxLevensvormenVorm4 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxLevensvormenVorm5 {
+        public bool SelectedCheckBoxLevensvormenVorm5
+        {
             get => _selectedCheckBoxLevensvormenVorm5;
-            set {
+            set
+            {
                 _selectedCheckBoxLevensvormenVorm5 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxLevensvormenVorm6 {
+        public bool SelectedCheckBoxLevensvormenVorm6
+        {
             get => _selectedCheckBoxLevensvormenVorm6;
-            set {
+            set
+            {
                 _selectedCheckBoxLevensvormenVorm6 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxLevensvormenVorm7 {
+        public bool SelectedCheckBoxLevensvormenVorm7
+        {
             get => _selectedCheckBoxLevensvormenVorm7;
-            set {
+            set
+            {
                 _selectedCheckBoxLevensvormenVorm7 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxLevensvormenVorm8 {
+        public bool SelectedCheckBoxLevensvormenVorm8
+        {
             get => _selectedCheckBoxLevensvormenVorm8;
-            set {
+            set
+            {
                 _selectedCheckBoxLevensvormenVorm8 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxLevensvormenVorm9 {
+        public bool SelectedCheckBoxLevensvormenVorm9
+        {
             get => _selectedCheckBoxLevensvormenVorm9;
-            set {
+            set
+            {
                 _selectedCheckBoxLevensvormenVorm9 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxMar {
+        public bool SelectedCheckBoxMar
+        {
             get => _selectedCheckBoxMar;
-            set {
+            set
+            {
                 _selectedCheckBoxMar = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxMay {
+        public bool SelectedCheckBoxMay
+        {
             get => _selectedCheckBoxMay;
-            set {
+            set
+            {
                 _selectedCheckBoxMay = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxNov {
+        public bool SelectedCheckBoxNov
+        {
             get => _selectedCheckBoxNov;
-            set {
+            set
+            {
                 _selectedCheckBoxNov = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxOct {
+        public bool SelectedCheckBoxOct
+        {
             get => _selectedCheckBoxOct;
-            set {
+            set
+            {
                 _selectedCheckBoxOct = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxRatioAster {
+        public bool SelectedCheckBoxRatioAster
+        {
             get => _selectedCheckBoxRatioAster;
-            set {
+            set
+            {
                 _selectedCheckBoxRatioAster = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxRatioGeranium {
+        public bool SelectedCheckBoxRatioGeranium
+        {
             get => _selectedCheckBoxRatioGeranium;
-            set {
+            set
+            {
                 _selectedCheckBoxRatioGeranium = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxRatioOnbekend {
+        public bool SelectedCheckBoxRatioOnbekend
+        {
             get => _selectedCheckBoxRatioOnbekend;
-            set {
+            set
+            {
                 _selectedCheckBoxRatioOnbekend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxRatioPachysandra {
+        public bool SelectedCheckBoxRatioPachysandra
+        {
             get => _selectedCheckBoxRatioPachysandra;
-            set {
+            set
+            {
                 _selectedCheckBoxRatioPachysandra = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxRatioSalvia {
+        public bool SelectedCheckBoxRatioSalvia
+        {
             get => _selectedCheckBoxRatioSalvia;
-            set {
+            set
+            {
                 _selectedCheckBoxRatioSalvia = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxSep {
+        public bool SelectedCheckBoxSep
+        {
             get => _selectedCheckBoxSep;
-            set {
+            set
+            {
                 _selectedCheckBoxSep = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxSociabiliteitI {
+        public bool SelectedCheckBoxSociabiliteitI
+        {
             get => _selectedCheckBoxSociabiliteitI;
-            set {
+            set
+            {
                 _selectedCheckBoxSociabiliteitI = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxSociabiliteitII {
+        public bool SelectedCheckBoxSociabiliteitII
+        {
             get => _selectedCheckBoxSociabiliteitIi;
-            set {
+            set
+            {
                 _selectedCheckBoxSociabiliteitIi = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxSociabiliteitIII {
+        public bool SelectedCheckBoxSociabiliteitIII
+        {
             get => _selectedCheckBoxSociabiliteitIii;
-            set {
+            set
+            {
                 _selectedCheckBoxSociabiliteitIii = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxSociabiliteitIV {
+        public bool SelectedCheckBoxSociabiliteitIV
+        {
             get => _selectedCheckBoxSociabiliteitIv;
-            set {
+            set
+            {
                 _selectedCheckBoxSociabiliteitIv = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxSociabiliteitV {
+        public bool SelectedCheckBoxSociabiliteitV
+        {
             get => _selectedCheckBoxSociabiliteitV;
-            set {
+            set
+            {
                 _selectedCheckBoxSociabiliteitV = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxSpruitAltijdGroen {
+        public bool SelectedCheckBoxSpruitAltijdGroen
+        {
             get => _selectedCheckBoxSpruitAltijdGroen;
-            set {
+            set
+            {
                 _selectedCheckBoxSpruitAltijdGroen = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxSpruitVoorjaarsgroen {
+        public bool SelectedCheckBoxSpruitVoorjaarsgroen
+        {
             get => _selectedCheckBoxSpruitVoorjaarsgroen;
-            set {
+            set
+            {
                 _selectedCheckBoxSpruitVoorjaarsgroen = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxSpruitZomergroen {
+        public bool SelectedCheckBoxSpruitZomergroen
+        {
             get => _selectedCheckBoxSpruitZomergroen;
-            set {
+            set
+            {
                 _selectedCheckBoxSpruitZomergroen = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStengelvormenVorm1 {
+        public bool SelectedCheckBoxStengelvormenVorm1
+        {
             get => _selectedCheckBoxStengelvormenVorm1;
-            set {
+            set
+            {
                 _selectedCheckBoxStengelvormenVorm1 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStengelvormenVorm2 {
+        public bool SelectedCheckBoxStengelvormenVorm2
+        {
             get => _selectedCheckBoxStengelvormenVorm2;
-            set {
+            set
+            {
                 _selectedCheckBoxStengelvormenVorm2 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStengelvormenVorm3 {
+        public bool SelectedCheckBoxStengelvormenVorm3
+        {
             get => _selectedCheckBoxStengelvormenVorm3;
-            set {
+            set
+            {
                 _selectedCheckBoxStengelvormenVorm3 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStengelvormenVorm4 {
+        public bool SelectedCheckBoxStengelvormenVorm4
+        {
             get => _selectedCheckBoxStengelvormenVorm4;
-            set {
+            set
+            {
                 _selectedCheckBoxStengelvormenVorm4 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStengelvormenVorm5 {
+        public bool SelectedCheckBoxStengelvormenVorm5
+        {
             get => _selectedCheckBoxStengelvormenVorm5;
-            set {
+            set
+            {
                 _selectedCheckBoxStengelvormenVorm5 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStengelvormenVorm6 {
+        public bool SelectedCheckBoxStengelvormenVorm6
+        {
             get => _selectedCheckBoxStengelvormenVorm6;
-            set {
+            set
+            {
                 _selectedCheckBoxStengelvormenVorm6 = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStrategieC {
+        public bool SelectedCheckBoxStrategieC
+        {
             get => _selectedCheckBoxStrategieC;
-            set {
+            set
+            {
                 _selectedCheckBoxStrategieC = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStrategieCR {
+        public bool SelectedCheckBoxStrategieCR
+        {
             get => _selectedCheckBoxStrategieCr;
-            set {
+            set
+            {
                 _selectedCheckBoxStrategieCr = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStrategieCSR {
+        public bool SelectedCheckBoxStrategieCSR
+        {
             get => _selectedCheckBoxStrategieCsr;
-            set {
+            set
+            {
                 _selectedCheckBoxStrategieCsr = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStrategieR {
+        public bool SelectedCheckBoxStrategieR
+        {
             get => _selectedCheckBoxStrategieR;
-            set {
+            set
+            {
                 _selectedCheckBoxStrategieR = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStrategieRS {
+        public bool SelectedCheckBoxStrategieRS
+        {
             get => _selectedCheckBoxStrategieRs;
-            set {
+            set
+            {
                 _selectedCheckBoxStrategieRs = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStrategieSC {
+        public bool SelectedCheckBoxStrategieSC
+        {
             get => _selectedCheckBoxStrategieSc;
-            set {
+            set
+            {
                 _selectedCheckBoxStrategieSc = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxStrategieS {
+        public bool SelectedCheckBoxStrategieS
+        {
             get => _selectedCheckBoxStrategieS;
-            set {
+            set
+            {
                 _selectedCheckBoxStrategieS = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVlindervriendelijk {
+        public bool SelectedCheckBoxVlindervriendelijk
+        {
             get => _selectedCheckBoxVlindervriendelijk;
-            set {
+            set
+            {
                 _selectedCheckBoxVlindervriendelijk = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVochtbehoefteDroogFris {
+        public bool SelectedCheckBoxVochtbehoefteDroogFris
+        {
             get => _selectedCheckBoxVochtbehoefteDroogFris;
-            set {
+            set
+            {
                 _selectedCheckBoxVochtbehoefteDroogFris = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVochtbehoefteDroog {
+        public bool SelectedCheckBoxVochtbehoefteDroog
+        {
             get => _selectedCheckBoxVochtbehoefteDroog;
-            set {
+            set
+            {
                 _selectedCheckBoxVochtbehoefteDroog = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVochtbehoefteFris {
+        public bool SelectedCheckBoxVochtbehoefteFris
+        {
             get => _selectedCheckBoxVochtbehoefteFris;
-            set {
+            set
+            {
                 _selectedCheckBoxVochtbehoefteFris = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVochtbehoefteFrisVochtig {
+        public bool SelectedCheckBoxVochtbehoefteFrisVochtig
+        {
             get => _selectedCheckBoxVochtbehoefteFrisVochtig;
-            set {
+            set
+            {
                 _selectedCheckBoxVochtbehoefteFrisVochtig = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVochtbehoefteNat {
+        public bool SelectedCheckBoxVochtbehoefteNat
+        {
             get => _selectedCheckBoxVochtbehoefteNat;
-            set {
+            set
+            {
                 _selectedCheckBoxVochtbehoefteNat = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVochtbehoefteOnbekend {
+        public bool SelectedCheckBoxVochtbehoefteOnbekend
+        {
             get => _selectedCheckBoxVochtbehoefteOnbekend;
-            set {
+            set
+            {
                 _selectedCheckBoxVochtbehoefteOnbekend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVochtbehoefteVochtig {
+        public bool SelectedCheckBoxVochtbehoefteVochtig
+        {
             get => _selectedCheckBoxVochtbehoefteVochtig;
-            set {
+            set
+            {
                 _selectedCheckBoxVochtbehoefteVochtig = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVochtbehoefteVochtigNat {
+        public bool SelectedCheckBoxVochtbehoefteVochtigNat
+        {
             get => _selectedCheckBoxVochtbehoefteVochtigNat;
-            set {
+            set
+            {
                 _selectedCheckBoxVochtbehoefteVochtigNat = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVoedingsbehoefteArm {
+        public bool SelectedCheckBoxVoedingsbehoefteArm
+        {
             get => _selectedCheckBoxVoedingsbehoefteArm;
-            set {
+            set
+            {
                 _selectedCheckBoxVoedingsbehoefteArm = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVoedingsbehoefteArmMatig {
+        public bool SelectedCheckBoxVoedingsbehoefteArmMatig
+        {
             get => _selectedCheckBoxVoedingsbehoefteArmMatig;
-            set {
+            set
+            {
                 _selectedCheckBoxVoedingsbehoefteArmMatig = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVoedingsbehoefteIndifferent {
+        public bool SelectedCheckBoxVoedingsbehoefteIndifferent
+        {
             get => _selectedCheckBoxVoedingsbehoefteIndifferent;
-            set {
+            set
+            {
                 _selectedCheckBoxVoedingsbehoefteIndifferent = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVoedingsbehoefteMatig {
+        public bool SelectedCheckBoxVoedingsbehoefteMatig
+        {
             get => _selectedCheckBoxVoedingsbehoefteMatig;
-            set {
+            set
+            {
                 _selectedCheckBoxVoedingsbehoefteMatig = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVoedingsbehoefteMatigVoedselrijk {
+        public bool SelectedCheckBoxVoedingsbehoefteMatigVoedselrijk
+        {
             get => _selectedCheckBoxVoedingsbehoefteMatigVoedselrijk;
-            set {
+            set
+            {
                 _selectedCheckBoxVoedingsbehoefteMatigVoedselrijk = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVoedingsbehoefteOnbekend {
+        public bool SelectedCheckBoxVoedingsbehoefteOnbekend
+        {
             get => _selectedCheckBoxVoedingsbehoefteOnbekend;
-            set {
+            set
+            {
                 _selectedCheckBoxVoedingsbehoefteOnbekend = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVoedingsbehoefteVoedselrijk {
+        public bool SelectedCheckBoxVoedingsbehoefteVoedselrijk
+        {
             get => _selectedCheckBoxVoedingsbehoefteVoedselrijk;
-            set {
+            set
+            {
                 _selectedCheckBoxVoedingsbehoefteVoedselrijk = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVoedingsbehoefteVoedselrijkIndifferent {
+        public bool SelectedCheckBoxVoedingsbehoefteVoedselrijkIndifferent
+        {
             get => _selectedCheckBoxVoedingsbehoefteVoedselrijkIndifferent;
-            set {
+            set
+            {
                 _selectedCheckBoxVoedingsbehoefteVoedselrijkIndifferent = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool SelectedCheckBoxVorstgevoelig {
+        public bool SelectedCheckBoxVorstgevoelig
+        {
             get => _selectedCheckBoxVorstgevoelig;
-            set {
+            set
+            {
                 _selectedCheckBoxVorstgevoelig = value;
                 OnPropertyChanged();
             }
