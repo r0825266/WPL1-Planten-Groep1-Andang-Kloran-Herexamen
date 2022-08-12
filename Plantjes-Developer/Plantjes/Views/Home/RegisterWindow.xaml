@@ -6,7 +6,7 @@
         xmlns:viewmodel="clr-namespace:Plantjes.ViewModels"
         xmlns:userControls="clr-namespace:Plantjes.Views.UserControls"
         mc:Ignorable="d"
-        Title="Register" Height="427" Width="505" Background="#FFA0A0A0">
+        Title="Register" Height="427" Width="505" Background="#FFA0A0A0" WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
         <DataTemplate DataType="{x:Type viewmodel:ViewModelRegister}">

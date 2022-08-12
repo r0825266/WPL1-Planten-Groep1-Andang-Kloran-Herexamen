@@ -11,7 +11,7 @@
         xmlns:plantjes="clr-namespace:Plantjes"
 
         mc:Ignorable="d"
-        Title="Planten" Height="900" Width="1250" Background="#FFA0A0A0">
+        Title="Planten" Height="900" Width="1250" Background="#FFA0A0A0" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
 
