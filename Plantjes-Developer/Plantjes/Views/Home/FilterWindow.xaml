@@ -7,7 +7,7 @@
         xmlns:userControls="clr-namespace:Plantjes.Views.UserControls"
         xmlns:viewmodel="clr-namespace:Plantjes.ViewModels"
         mc:Ignorable="d"
-        Title="Filter Window" Height="1150" Width="1150" Background="#FFA0A0A0">
+        Title="Filter Window" Height="1150" Width="1150" Background="#FFA0A0A0" WindowStartupLocation="CenterScreen">
 
     <!-- Written by Andang Kloran - Changed by Kjell -->
     <!-- Bigger window for more filters(for searching plants) that contains the necessary user controls -->

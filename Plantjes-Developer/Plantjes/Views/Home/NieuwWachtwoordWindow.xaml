@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Plantjes.Views.Home"
         xmlns:vm="clr-namespace:Plantjes.ViewModels"
         mc:Ignorable="d"
-        Title="NieuwWachtwoordWindow" Height="300" Width="464" Background="#FFA0A0A0">
+        Title="NieuwWachtwoordWindow" Height="300" Width="464" Background="#FFA0A0A0" WindowStartupLocation="CenterScreen">
     <!-- Written by Kjell-->
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:ViewModelNieuwWachtwoord}">

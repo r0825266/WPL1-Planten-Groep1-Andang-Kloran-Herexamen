@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:Plantjes.ViewModels"
         xmlns:uc="clr-namespace:Plantjes.Views.UserControls"
         mc:Ignorable="d"
-        Title="Login" Height="300" Width="464" Background="#FFA0A0A0">
+        Title="Login" Height="300" Width="464" Background="#FFA0A0A0" WindowStartupLocation="CenterScreen">
     <!--Written by Kenny-->
 
     <Window.Resources>
