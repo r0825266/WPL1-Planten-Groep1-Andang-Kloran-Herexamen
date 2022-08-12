@@ -22,7 +22,6 @@ namespace Plantjes.ViewModels {
         public ViewModelAddPlant(SearchService searchService, DetailService detailservice)
         {
             _searchService = searchService;
-            //_searchService = new SearchService();
             _detailService = detailservice;
 
             //Observable Collections 
@@ -41,6 +40,7 @@ namespace Plantjes.ViewModels {
             //ICommands
             ////These will be used to bind our buttons in the xaml and to give them functionality
             cancelCommand = new RelayCommand(cancelButton);
+            AddPlantCommand = new RelayCommand(AddPlantButtonClick);
 
             //These comboboxes will already be filled with data on startup
             fillComboboxes();
@@ -510,26 +510,14 @@ namespace Plantjes.ViewModels {
         private bool _selectedCheckBoxVoedingsbehoefteVoedselrijkIndifferent;
         private bool _selectedCheckBoxVorstgevoelig;
 
-        //Defining variables for Textboxes
-        private string _typeInput;
-        private string _familieInput;
-        private string _geslachtInput;
-        private string _naamInput;
-        public string _soortInput;
-        public string _variantInput;
-        public string _ratioBladBloeiInput;
-        public string _opmerkingInput;
-        public string _frequenciePerJaarInput;
-
         private string _errorMessage;
 
-
-
-
-
-        //public ViewModelAddPlant() {
-        //    cancelCommand = new RelayCommand(cancelButton);
-        //}
+        //Button controls--Andang kloran
+        public RelayCommand AddPlantCommand
+        {
+            get => _cancelCommand;
+            set => _cancelCommand = value;
+        }
 
         public RelayCommand cancelCommand
         {
@@ -543,6 +531,40 @@ namespace Plantjes.ViewModels {
             var mainWindow = new MainWindow();
             mainWindow.Show();
             Application.Current.Windows[0]?.Close();
+        }
+        //PlantToevoegen button adds the plant to the database or displays error message(if any)
+        public void AddPlantButtonClick()
+        {
+            errorMessage = _searchService.AddPlantButton(SelectedType, SelectedFamilie, SelectedGeslacht, SelectedSoort, SelectedVariant, SelectedRatioBloeiBlad, SelectedNederlandseNaam);
+            //Closes PlantToevoegen window if no error
+            if (errorMessage == null || errorMessage == string.Empty)
+            {
+                //Clear input after adding plant
+                SelectedType = null;
+                SelectedFamilie = null;
+                SelectedGeslacht = null;
+                SelectedSoort = null;
+                SelectedVariant = null;
+                SelectedRatioBloeiBlad = SelectedNederlandseNaam = string.Empty;
+                Application.Current.Windows[0]?.Close(); 
+            }
+            else
+            {
+                MessageBox.Show(errorMessage);
+            }
+        }
+
+
+
+        public string errorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+
+                RaisePropertyChanged("errorMessage");
+            }
         }
 
         //Bindings CheckBoxes

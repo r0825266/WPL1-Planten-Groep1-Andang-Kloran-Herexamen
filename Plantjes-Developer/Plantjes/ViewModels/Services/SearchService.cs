@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Plantjes.Dao;
 using Plantjes.Models.Db;
+using Plantjes.Views.Home;
 
 namespace Plantjes.ViewModels.Services; 
 
@@ -465,4 +467,32 @@ public class SearchService : INotifyPropertyChanged {
     }
 
     #endregion
+
+    //Written by Andang Kloran
+    //Service for adding a plant to the database
+    private Plant _plant { get; set; }
+    public string AddPlantButton(TfgsvType SelectedType, TfgsvFamilie SelectedFamilie, TfgsvGeslacht SelectedGeslacht, TfgsvSoort SelectedSoort, TfgsvVariant SelectedVariant, string SelectedRatioBloeiBlad, string SelectedNederlandseNaam)
+    {
+        var Message = string.Empty;
+
+            //If fields are selected, add the selected properties to database else, display error message
+        if (SelectedType != null /*&& SelectedFamilie != null && SelectedGeslacht != null && SelectedSoort != null && SelectedVariant != null && SelectedRatioBloeiBlad != null && SelectedNederlandseNaam != null */)
+        {
+            DAOPlants.AddPlant(SelectedType, SelectedFamilie, SelectedGeslacht, SelectedSoort, SelectedVariant, SelectedRatioBloeiBlad, SelectedNederlandseNaam);
+
+            //Messagebox confirms that plant hass been added successfully
+            MessageBox.Show("Plant succesvol toegevoeged!");
+
+            //Reopen main window
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
+        else
+        {
+            Message = "Zorg dat alle velden ingevuld zijn!";
+        }
+
+        return Message;
+    }
+
 }
