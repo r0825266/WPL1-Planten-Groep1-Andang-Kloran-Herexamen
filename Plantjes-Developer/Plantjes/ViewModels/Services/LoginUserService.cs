@@ -211,8 +211,5 @@ public class LoginUserService : INotifyPropertyChanged {
         return Message;
     }
 
-
-
-
     #endregion
 }

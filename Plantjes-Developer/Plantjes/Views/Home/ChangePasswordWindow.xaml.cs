@@ -6,6 +6,7 @@ using System.Windows.Controls;
 namespace Plantjes.Views.Home
 {
     /// <summary>
+    /// written by Andang Kloran - on code of Xander
     /// Interaction logic for ChangePasswordWindow.xaml
     /// </summary>
     public partial class ChangePasswordWindow : Window
