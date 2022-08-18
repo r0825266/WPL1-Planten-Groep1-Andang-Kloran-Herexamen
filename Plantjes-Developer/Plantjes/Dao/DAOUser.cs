@@ -9,6 +9,7 @@ using System.Text;
 using System.Security.Cryptography;
 using Microsoft.Win32;
 using Plantjes.ViewModels;
+using System.Windows;
 
 namespace Plantjes.Dao {
     //Gesplitst door Xander, aangepast door Warre
@@ -20,7 +21,7 @@ namespace Plantjes.Dao {
             return context.Gebruikers.Include(x => x.Rol).FirstOrDefault(g => g.Emailadres == userEmail);
         }
 
-        //written by kenny -- changed by Kjell
+        //written by kenny -- changed by Kjell -- Added to by Andang Kloran
         public static void RegisterUser(string vivesNr, string firstName, string lastName, string emailadres, string password, DateTime last_login) {
             var passwordBytes = Encoding.ASCII.GetBytes(password);
             var md5Hasher = new MD5CryptoServiceProvider();
@@ -30,17 +31,39 @@ namespace Plantjes.Dao {
             else if (emailadres.EndsWith("@student.vives.be")) role = context.Rols.First(x => x.Omschrijving == "Student");
             else role = context.Rols.First(x => x.Omschrijving == "Oud-Student");
             if (role == null) throw new MissingMemberException("Rol niet gevonden!");
-            var gebruiker = new Gebruiker {
-                Vivesnr = vivesNr,
-                Voornaam = firstName,
-                Achternaam = lastName,
-                Emailadres = emailadres,
-                HashPaswoord = passwordHashed,
-                Rol = role,
-                LastLogin = last_login
-            };
-            context.Gebruikers.Add(gebruiker);
-            context.SaveChanges();
+
+            //<Andang Kloran>
+            //If user email does not end in @vives.be or @student.vives.be, then user is first saved on the GebruikersInBehandeling table
+            //Such user cannot login until approved by an administrator and transfered to the Gebruikers list
+            if (emailadres.EndsWith("@vives.be") || emailadres.EndsWith("@student.vives.be"))
+            {
+                var gebruiker = new Gebruiker {
+                    Vivesnr = vivesNr,
+                    Voornaam = firstName,
+                    Achternaam = lastName,
+                    Emailadres = emailadres,
+                    HashPaswoord = passwordHashed,
+                    Rol = role,
+                    LastLogin = last_login
+                };
+                context.Gebruikers.Add(gebruiker);
+                context.SaveChanges();
+            }
+            else if (!emailadres.EndsWith("@vives.be") || !emailadres.EndsWith("@student.vives.be"))
+            {
+                var gebruikersInBehandeling = new GebruikersInBehandeling
+                {
+                    Vivesnr = vivesNr,
+                    Voornaam = firstName,
+                    Achternaam = lastName,
+                    Emailadres = emailadres,
+                    HashPaswoord = passwordHashed,
+                    Rol = role,
+                    LastLogin = last_login
+                };
+                context.GebruikersInBehandelings.Add(gebruikersInBehandeling);
+                context.SaveChanges();
+            }
         }
 
         //Written by Kjell
@@ -65,6 +88,12 @@ namespace Plantjes.Dao {
         //written by kenny
         public static List<Gebruiker> getAllGebruikers() {
             return context.Gebruikers.ToList();
+        }
+
+        //written by Andang kloran
+        public static List<GebruikersInBehandeling> getAllGebruikersInBehandelings()
+        {
+            return context.GebruikersInBehandelings.ToList();
         }
 
         //written by kenny
@@ -196,12 +225,20 @@ namespace Plantjes.Dao {
         }
 
         public static List<Gebruiker> GetAllUsersNoTracking() => context.Gebruikers.AsNoTracking().ToList();
+        public static List<GebruikersInBehandeling> GetAllUsersWaitingNoTracking() => context.GebruikersInBehandelings.AsNoTracking().ToList(); //Andang
 
         public static Gebruiker GetUser(int id) => context.Gebruikers.First(x => x.Id == id);
+        public static GebruikersInBehandeling GetUserWaiting(int id) => context.GebruikersInBehandelings.First(x => x.Id == id); //Andang --Get user from table GebruikersInBehandeling
         public static Gebruiker GetUserNoTracking(int id) => context.Gebruikers.AsNoTracking().First(x => x.Id == id);
 
         public static void DeleteUser(int id) {
             context.Gebruikers.Remove(GetUser(id));
+            context.SaveChanges();
+        }
+        //Andang --Reject and Delete user from table GebruikerInBehandeling
+        public static void RejectUserWaiting(int id) 
+        {
+            context.GebruikersInBehandelings.Remove(GetUserWaiting(id));
             context.SaveChanges();
         }
 
@@ -217,6 +254,35 @@ namespace Plantjes.Dao {
 
             context.SaveChanges();
         }
-        //</Xander Baes>
+
+        //Andang Kloran--Accept waiting user by moving user from table GebruikersInBehandeling to table Gebruikers
+        //User can now login
+        public static void AcceptUser(GebruikersInBehandeling userWaiting)
+        {
+            var dbuserWaiting = context.GebruikersInBehandelings.FirstOrDefault(x => x.Id == userWaiting.Id);
+            if (dbuserWaiting != null)
+            {
+                dbuserWaiting.Rol = context.Rols.First(x => x.Omschrijving == "Oud-Student"); //Set rol as Oud-Student
+                var gebruiker = new Gebruiker
+                {
+                    Vivesnr = dbuserWaiting.Vivesnr,
+                    Voornaam = dbuserWaiting.Voornaam,
+                    Achternaam = dbuserWaiting.Achternaam,
+                    Emailadres = dbuserWaiting.Emailadres,
+                    HashPaswoord = dbuserWaiting.HashPaswoord,
+                    Rol = dbuserWaiting.Rol,
+                    LastLogin = dbuserWaiting.LastLogin
+                };
+                context.Gebruikers.Add(gebruiker);
+                context.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("User already exists!");
+            }
+
+            context.SaveChanges();
+        }
+       //Andang Kloran 
     }
 }

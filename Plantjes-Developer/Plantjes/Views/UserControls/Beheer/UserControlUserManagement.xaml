@@ -7,13 +7,32 @@
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1200">
-    <!-- Written by Kjell-->
+    <!-- Written by Kjell and Adjusted by Andang-->
     <Grid>
         <Border Style="{StaticResource BorderBox}" Margin="10,100,739,10" Name="BorderListbox">
-            <ListBox
+            <StackPanel>
+                <ListBox
                 Visibility="Visible" Background="#99FFFFFF" FontWeight="Bold"
-                FontSize="14" Width="455" HorizontalAlignment="Center" Height="637"
-                VerticalAlignment="Center" ItemsSource="{Binding users}" SelectedItem="{Binding currentUser}" DisplayMemberPath="DisplayNameWithNr" />
+                FontSize="14" Width="455" HorizontalAlignment="Center" Height="250"
+                VerticalAlignment="Top" ItemsSource="{Binding users}" SelectedItem="{Binding currentUser}" DisplayMemberPath="DisplayNameWithNr" />
+                <Label Content="Gebruikers in behandeling" FontSize="17" Height="44" Width="300" Margin="0,20, 80,10" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource LabelBorderTitle}">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <ListBox
+                Visibility="Visible" Background="#99FFFFFF" FontWeight="Bold"
+                FontSize="14" Width="455" HorizontalAlignment="Center" Height="240"
+                VerticalAlignment="Bottom" ItemsSource="{Binding usersWaiting}" SelectedItem="{Binding currentUserWaiting}" DisplayMemberPath="DisplayNameWithEmail"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Toelaten"
+                            Style="{StaticResource ButtonUnified}" Margin="12,12,0,0" Height="35"
+                            Command="{Binding AcceptCommand}" />
+                    <Button Content="Afwijzen"
+                            Style="{StaticResource ButtonUnified}" Margin="12,12,0,0" Height="35"
+                            Command="{Binding RejectCommand}" />
+                </StackPanel>
+            </StackPanel>
         </Border>
         <Border Style="{StaticResource BorderBox}" Margin="480,100,480,10">
             <Canvas>
@@ -42,7 +61,7 @@
                 </StackPanel>
                 <StackPanel Margin="119,60,-2,10">
                     <TextBox TextWrapping="Wrap" Text="{Binding currentUser.Vivesnr}" Width="260" Height="40" FontSize="16"
-                             BorderThickness="0" Margin="44,0,0,0" />
+                             BorderThickness="0" Margin="44,0,0,0"/>
                     <TextBox TextWrapping="Wrap" Text="{Binding currentUser.Voornaam}" Width="260" Height="40" FontSize="16"
                              BorderThickness="0" Margin="44,10,0,0" />
                     <TextBox TextWrapping="Wrap" Text="{Binding currentUser.Achternaam}" Width="260" Height="40" FontSize="16"
