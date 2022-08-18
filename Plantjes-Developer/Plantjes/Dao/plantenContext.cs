@@ -48,6 +48,7 @@ namespace Plantjes.Models.Db
         public virtual DbSet<FenotypeMulti> FenotypeMultis { get; set; }
         public virtual DbSet<Foto> Fotos { get; set; }
         public virtual DbSet<Gebruiker> Gebruikers { get; set; }
+        public virtual DbSet<GebruikersInBehandeling> GebruikersInBehandelings { get; set; }
         public virtual DbSet<Plant> Plants { get; set; }
         public virtual DbSet<Rol> Rols { get; set; }
         public virtual DbSet<TfgsvFamilie> TfgsvFamilies { get; set; }
@@ -640,6 +641,45 @@ namespace Plantjes.Models.Db
                     .HasForeignKey(d => d.RolId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Gebruiker_Rol");
+            });
+
+            modelBuilder.Entity<GebruikersInBehandeling>(entity =>
+            {
+                entity.ToTable("GebruikersInBehandeling");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Achternaam)
+                    .HasMaxLength(50)
+                    .HasColumnName("achternaam");
+
+                entity.Property(e => e.Emailadres)
+                    .HasMaxLength(150)
+                    .HasColumnName("emailadres");
+
+                entity.Property(e => e.HashPaswoord)
+                    .HasMaxLength(64)
+                    .HasColumnName("hashPaswoord");
+
+                entity.Property(e => e.LastLogin)
+                    .HasColumnType("date")
+                    .HasColumnName("last_login");
+
+                entity.Property(e => e.RolId).HasColumnName("rolId");
+
+                entity.Property(e => e.Vivesnr)
+                    .HasMaxLength(15)
+                    .HasColumnName("vivesnr");
+
+                entity.Property(e => e.Voornaam)
+                    .HasMaxLength(50)
+                    .HasColumnName("voornaam");
+
+                entity.HasOne(d => d.Rol)
+                    .WithMany(p => p.GebruikersInBehandelings)
+                    .HasForeignKey(d => d.RolId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GebruikersInBehandeling_Rol");
             });
 
             modelBuilder.Entity<Plant>(entity =>

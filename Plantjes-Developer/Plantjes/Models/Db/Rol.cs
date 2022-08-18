@@ -8,11 +8,13 @@ namespace Plantjes.Models.Db
         public Rol()
         {
             Gebruikers = new HashSet<Gebruiker>();
+            GebruikersInBehandelings = new HashSet<GebruikersInBehandeling>();
         }
 
         public int Id { get; set; }
         public string Omschrijving { get; set; }
 
         public virtual ICollection<Gebruiker> Gebruikers { get; set; }
+        public virtual ICollection<GebruikersInBehandeling> GebruikersInBehandelings { get; set; }
     }
 }

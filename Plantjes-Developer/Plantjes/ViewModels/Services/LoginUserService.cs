@@ -137,7 +137,7 @@ public class LoginUserService : INotifyPropertyChanged {
                 else
                 {
                     // als de gebruiker niet gevonden wordt, errorMessage invullen
-                    loginResult.errorMessage = $"FOUT! Er is geen account gevonden voor {userNameInput}" + "\r\n" + "Gelieve eerst te registreren.";
+                    loginResult.errorMessage = $"FOUT! Er is geen account gevonden voor {userNameInput}" + "\r\n" + "Gelieve eerst te registreren OF Neem contact op met beheerder!";
                 }
             }
             else
